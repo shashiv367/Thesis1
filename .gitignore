@@ -1,0 +1,19 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python (in case any scripts run at root)
+__pycache__/
+*.pyc
+venv/
+env/
+.env
+
+# Node.js
+node_modules/
