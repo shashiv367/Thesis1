@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Users, ChevronRight, ChevronDown } from "lucide-react";
@@ -21,7 +22,7 @@ export default function GuideTeams() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/guide/teams/", getHeaders())
+    axios.get(`${API_BASE_URL}/api/guide/teams/`, getHeaders())
       .then(r => setTeams(r.data))
       .catch(() => {})
       .finally(() => setLoading(false));

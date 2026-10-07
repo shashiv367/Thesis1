@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BarChart3, Users, TrendingUp } from "lucide-react";
@@ -22,7 +23,7 @@ export default function GuideAnalysis() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/guide/teams/", getHeaders())
+    axios.get(`${API_BASE_URL}/api/guide/teams/`, getHeaders())
       .then(r => setTeams(r.data))
       .finally(() => setTeamsLoading(false));
   }, []);
@@ -31,7 +32,7 @@ export default function GuideAnalysis() {
     setLoading(true);
     setAnalysis(null);
     try {
-      const res = await axios.get(`http://localhost:8000/api/guide/teams/${teamId}/analysis/`, getHeaders());
+      const res = await axios.get(`${API_BASE_URL}/api/guide/teams/${teamId}/analysis/`, getHeaders());
       setAnalysis(res.data);
     } catch { }
     finally { setLoading(false); }

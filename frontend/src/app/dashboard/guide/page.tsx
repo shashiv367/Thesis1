@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BarChart3, Users, ListTodo, FileText, CheckSquare, Clock, TrendingUp } from "lucide-react";
@@ -25,7 +26,7 @@ export default function GuideOverview() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/guide/overview/", getHeaders())
+    axios.get(`${API_BASE_URL}/api/guide/overview/`, getHeaders())
       .then(r => setData(r.data))
       .catch(() => setError("Failed to load overview data."))
       .finally(() => setLoading(false));

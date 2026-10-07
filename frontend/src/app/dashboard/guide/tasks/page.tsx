@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ListTodo, Plus, Trash2, Clock, Edit } from "lucide-react";
@@ -37,8 +38,8 @@ export default function GuideTasks() {
     setLoading(true);
     try {
       const [tasksRes, teamsRes] = await Promise.all([
-        axios.get("http://localhost:8000/api/guide/tasks/", getHeaders()),
-        axios.get("http://localhost:8000/api/guide/teams/", getHeaders()),
+        axios.get(`${API_BASE_URL}/api/guide/tasks/`, getHeaders()),
+        axios.get(`${API_BASE_URL}/api/guide/teams/`, getHeaders()),
       ]);
       setTasks(tasksRes.data);
       setTeams(teamsRes.data);
@@ -77,10 +78,10 @@ export default function GuideTasks() {
       };
       
       if (editId) {
-        await axios.put(`http://localhost:8000/api/guide/tasks/${editId}/`, payload, getHeaders());
+        await axios.put(`${API_BASE_URL}/api/guide/tasks/${editId}/`, payload, getHeaders());
         setFormMsg({ type: "success", text: "Task updated successfully!" });
       } else {
-        await axios.post("http://localhost:8000/api/guide/tasks/", payload, getHeaders());
+        await axios.post(`${API_BASE_URL}/api/guide/tasks/`, payload, getHeaders());
         setFormMsg({ type: "success", text: "Task created successfully!" });
       }
       
@@ -97,7 +98,7 @@ export default function GuideTasks() {
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this task?")) return;
     try {
-      await axios.delete(`http://localhost:8000/api/guide/tasks/${id}/`, getHeaders());
+      await axios.delete(`${API_BASE_URL}/api/guide/tasks/${id}/`, getHeaders());
       fetchData();
     } catch { alert("Failed to delete task."); }
   };

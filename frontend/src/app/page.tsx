@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,13 +16,14 @@ export default function LoginPage() {
     setError("");
     
     try {
-      const response = await axios.post("http://localhost:8000/api/auth/login/", {
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login/`, {
         username,
         password
       });
       
       const { token, role } = response.data;
       localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
       localStorage.setItem("username", username);
       
       if (role === "admin") {

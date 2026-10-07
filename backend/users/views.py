@@ -140,10 +140,10 @@ from .serializers import TeamSerializer
 
 
 class TeamListView(generics.ListCreateAPIView):
-    queryset = Team.objects.all().order_by("-id")
+    queryset = Team.objects.select_related("guide").prefetch_related("students").order_by("-id")
     serializer_class = TeamSerializer
 
 
 class TeamDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Team.objects.all()
+    queryset = Team.objects.select_related("guide").prefetch_related("students")
     serializer_class = TeamSerializer

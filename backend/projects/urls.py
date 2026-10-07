@@ -13,6 +13,7 @@ from .views import (
     SubmissionViewSet,
     TaskSubmissionDetailView,
     TaskSubmissionListView,
+    TaskSubmissionPreviewView,
 )
 
 router = DefaultRouter()
@@ -46,5 +47,10 @@ urlpatterns = [
         "task-submissions/<int:pk>/",
         TaskSubmissionDetailView.as_view(),
         name="task-submission-detail",
+    ),
+    path(
+        "task-submissions/<int:pk>/preview/",
+        TaskSubmissionPreviewView.as_view(),
+        name="task-submission-preview",
     ),
 ]

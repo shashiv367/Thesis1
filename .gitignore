@@ -14,8 +14,11 @@ __pycache__/
 venv/
 env/
 .env
+.ruff_cache/
+*.sqlite3
 
 # Node.js
 node_modules/
+.next/
 sample_data/clean_submission.pdf
 sample_data/plagiarized_submission.pdf

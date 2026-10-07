@@ -1,6 +1,6 @@
 from celery import shared_task
 
-from plagiarism_engine.analyzer import PlagiarismAnalyzer
+from plagiarism_engine.analyzer import get_analyzer
 
 from .models import Submission
 
@@ -20,12 +20,11 @@ def process_plagiarism_check(submission_id):
             # Fallback mock text if reading binary/PDF fails in this prototype
             content = "This is a sample student submission text that might contain plagiarized content from the corpus."
 
-        analyzer = PlagiarismAnalyzer()
+        analyzer = get_analyzer()
         score, matches = analyzer.check_plagiarism(content)
 
         # Update submission with async results
         submission.plagiarism_score = score
-        submission.feedback = f"Found {len(matches)} potential semantic matches."
         submission.save()
 
         return score

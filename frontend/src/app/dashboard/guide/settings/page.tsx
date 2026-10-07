@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { User, Key } from "lucide-react";
@@ -18,8 +19,8 @@ export default function GuideSettings() {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8000/api/auth/users/me/", getHeaders()),
-      axios.get("http://localhost:8000/api/guide/teams/", getHeaders()),
+      axios.get(`${API_BASE_URL}/api/auth/users/me/`, getHeaders()),
+      axios.get(`${API_BASE_URL}/api/guide/teams/`, getHeaders()),
     ]).then(([p, t]) => {
       setProfile(p.data);
       setTeams(t.data);
@@ -32,7 +33,7 @@ export default function GuideSettings() {
     if (newPwd !== confirmPwd) { setPwdMsg({ type: "error", text: "New passwords do not match." }); return; }
     if (newPwd === oldPwd) { setPwdMsg({ type: "error", text: "New password must differ from current." }); return; }
     try {
-      await axios.put("http://localhost:8000/api/auth/users/me/",
+      await axios.put(`${API_BASE_URL}/api/auth/users/me/`,
         { old_password: oldPwd, new_password: newPwd }, getHeaders());
       setPwdMsg({ type: "success", text: "Password changed successfully." });
       setOldPwd(""); setNewPwd(""); setConfirmPwd("");

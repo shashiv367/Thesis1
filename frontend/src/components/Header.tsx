@@ -1,24 +1,31 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Header() {
-  const [initial, setInitial] = useState("U");
+  const [initial, setInitial] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("username");
+      if (stored) return stored.charAt(0).toUpperCase();
+    }
+    return "U";
+  });
 
   useEffect(() => {
-    // Try to get username from localStorage first for immediate display
     const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setInitial(storedUsername.charAt(0).toUpperCase());
+      return;
     }
 
-    // Fetch actual user data to get the exact name
+    // Only fetch user data if not already cached
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const res = await axios.get("http://localhost:8000/api/auth/users/me/", {
+          const res = await axios.get(`${API_BASE_URL}/api/auth/users/me/`, {
             headers: { Authorization: `Token ${token}` }
           });
           const name = res.data.first_name || res.data.username;

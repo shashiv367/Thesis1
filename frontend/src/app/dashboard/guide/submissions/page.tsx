@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FileText, Download, ShieldCheck, AlertTriangle, Loader, Eye } from "lucide-react";
@@ -32,7 +33,7 @@ export default function GuideSubmissions() {
 
   const fetchData = () => {
     setLoading(true);
-    axios.get("http://localhost:8000/api/task-submissions/", getHeaders())
+    axios.get(`${API_BASE_URL}/api/task-submissions/`, getHeaders())
       .then(r => setSubmissions(r.data))
       .catch(() => setMsg({ type: "error", text: "Failed to load submissions." }))
       .finally(() => setLoading(false));
@@ -44,7 +45,7 @@ export default function GuideSubmissions() {
     setRunningPlagiarism(id);
     setMsg({ type: "", text: "" });
     try {
-      const res = await axios.patch(`http://localhost:8000/api/task-submissions/${id}/`,
+      const res = await axios.patch(`${API_BASE_URL}/api/task-submissions/${id}/`,
         { action: 'plagiarism' }, getHeaders());
       setMsg({ type: "success", text: `Analysis complete. Similarity: ${res.data.plagiarism_score?.toFixed(1)}%` });
       fetchData();
@@ -60,6 +61,15 @@ export default function GuideSubmissions() {
     const score = sub.plagiarism_score || 0;
     if (score > 30) return <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full flex items-center"><AlertTriangle className="w-3 h-3 mr-1" />{score.toFixed(1)}%</span>;
     return <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full flex items-center"><ShieldCheck className="w-3 h-3 mr-1" />{score.toFixed(1)}%</span>;
+  };
+
+  const getGradeColor = (grade: string) => {
+    if (grade === 'A') return 'bg-green-100 text-green-800';
+    if (grade === 'B') return 'bg-blue-100 text-blue-800';
+    if (grade === 'C') return 'bg-yellow-100 text-yellow-800';
+    if (grade === 'D') return 'bg-orange-100 text-orange-800';
+    if (grade === 'F') return 'bg-red-100 text-red-800';
+    return 'bg-gray-100 text-gray-600';
   };
 
   return (
@@ -81,15 +91,17 @@ export default function GuideSubmissions() {
                 <th className="pb-3 font-medium">Task</th>
                 <th className="pb-3 font-medium">Submitted</th>
                 <th className="pb-3 font-medium">Plagiarism</th>
-                <th className="pb-3 font-medium">Score</th>
+                <th className="pb-3 font-medium text-center">Score</th>
+                <th className="pb-3 font-medium text-center">Grade</th>
+                <th className="pb-3 font-medium">Feedback</th>
                 <th className="pb-3 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="text-sm text-gray-700 divide-y divide-gray-100">
               {loading ? (
-                <tr><td colSpan={6} className="py-8 text-center text-gray-400">Loading submissions...</td></tr>
+                <tr><td colSpan={8} className="py-8 text-center text-gray-400">Loading submissions...</td></tr>
               ) : submissions.length === 0 ? (
-                <tr><td colSpan={6} className="py-8 text-center text-gray-400">No submissions available.</td></tr>
+                <tr><td colSpan={8} className="py-8 text-center text-gray-400">No submissions available.</td></tr>
               ) : (
                 submissions.map(s => {
                   const filename = s.file?.split('/').pop() || 'Document';
@@ -102,11 +114,19 @@ export default function GuideSubmissions() {
                       <td className="py-4 text-gray-600">{s.task_title}</td>
                       <td className="py-4 text-gray-500">{new Date(s.submitted_at).toLocaleDateString()}</td>
                       <td className="py-4">{getPlagiarismBadge(s)}</td>
-                      <td className="py-4 font-bold text-gray-800">
+                      <td className="py-4 text-center font-bold text-gray-800">
                         {s.score !== null ? `${s.score}/100` : <span className="text-gray-400 font-normal">Pending</span>}
                       </td>
+                      <td className="py-4 text-center">
+                        {s.grade ? (
+                          <span className={`px-2 py-1 rounded font-bold text-xs ${getGradeColor(s.grade)}`}>{s.grade}</span>
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
+                      </td>
+                      <td className="py-4 text-gray-600 max-w-xs text-xs italic">{s.feedback || '—'}</td>
                       <td className="py-4 text-right space-x-1">
-                        <a href={`http://localhost:8000${s.file}`} target="_blank" rel="noreferrer"
+                        <a href={getMediaUrl(s.file)} target="_blank" rel="noreferrer"
                           className="inline-flex items-center text-blue-600 hover:bg-blue-50 p-2 rounded-lg" title="View/Download">
                           <Download className="w-4 h-4" />
                         </a>

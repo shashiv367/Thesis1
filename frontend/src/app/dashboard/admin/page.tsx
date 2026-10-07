@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 
 import { useState, useEffect } from "react";
 import { UserPlus, Shield, Trash2, Mail, Users as UsersIcon, Link as LinkIcon, Briefcase } from "lucide-react";
@@ -54,9 +55,9 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const usersRes = await axios.get("http://localhost:8000/api/auth/users/");
+      const usersRes = await axios.get(`${API_BASE_URL}/api/auth/users/`);
       setUsers(usersRes.data);
-      const teamsRes = await axios.get("http://localhost:8000/api/auth/teams/");
+      const teamsRes = await axios.get(`${API_BASE_URL}/api/auth/teams/`);
       setTeams(teamsRes.data);
     } catch (err) {
       console.error("Error fetching data", err);
@@ -80,7 +81,7 @@ export default function AdminDashboard() {
       return;
     }
     try {
-      await axios.post("http://localhost:8000/api/auth/users/", {
+      await axios.post(`${API_BASE_URL}/api/auth/users/`, {
         name: studentName,
         email: studentEmail,
         password: studentPassword,
@@ -105,7 +106,7 @@ export default function AdminDashboard() {
       return;
     }
     try {
-      await axios.post("http://localhost:8000/api/auth/users/", {
+      await axios.post(`${API_BASE_URL}/api/auth/users/`, {
         name: guideName,
         email: guideEmail,
         password: guidePassword,
@@ -126,7 +127,7 @@ export default function AdminDashboard() {
     setTeamError("");
     setTeamSuccess("");
     try {
-      await axios.post("http://localhost:8000/api/auth/teams/", {
+      await axios.post(`${API_BASE_URL}/api/auth/teams/`, {
         name: teamName,
         description: teamDescription,
         guide_id: selectedGuideId || null,

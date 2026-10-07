@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE_URL, getMediaUrl } from "@/utils/api";
 
 import { useState, useEffect } from "react";
 import { Users as UsersIcon, Edit, Key, Send, Trash2, Mail, Link as LinkIcon, Shield } from "lucide-react";
@@ -45,9 +46,9 @@ export default function ManageAccounts() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const usersRes = await axios.get("http://localhost:8000/api/auth/users/");
+      const usersRes = await axios.get(`${API_BASE_URL}/api/auth/users/`);
       setUsers(usersRes.data);
-      const teamsRes = await axios.get("http://localhost:8000/api/auth/teams/");
+      const teamsRes = await axios.get(`${API_BASE_URL}/api/auth/teams/`);
       setTeams(teamsRes.data);
     } catch (err) {
       console.error("Error fetching data", err);
@@ -63,7 +64,7 @@ export default function ManageAccounts() {
   const handleDeleteUser = async (id: number) => {
     if (!confirm("Are you sure you want to delete this account? This action cannot be undone.")) return;
     try {
-      await axios.delete(`http://localhost:8000/api/auth/users/${id}/`);
+      await axios.delete(`${API_BASE_URL}/api/auth/users/${id}/`);
       fetchData();
     } catch (err) {
       alert("Error deleting user.");
@@ -73,7 +74,7 @@ export default function ManageAccounts() {
   const handleDeleteTeam = async (id: number) => {
     if (!confirm("Are you sure you want to delete this team? Note: Students and Guides will NOT be deleted.")) return;
     try {
-      await axios.delete(`http://localhost:8000/api/auth/teams/${id}/`);
+      await axios.delete(`${API_BASE_URL}/api/auth/teams/${id}/`);
       fetchData();
     } catch (err) {
       alert("Error deleting team.");
@@ -82,7 +83,7 @@ export default function ManageAccounts() {
 
   const handleSendInvite = async (id: number) => {
     try {
-      const res = await axios.post(`http://localhost:8000/api/auth/users/${id}/invite/`);
+      const res = await axios.post(`${API_BASE_URL}/api/auth/users/${id}/invite/`);
       alert(res.data.message);
     } catch (err) {
       alert("Error sending invite.");
@@ -100,7 +101,7 @@ export default function ManageAccounts() {
   const handleEditUserSave = async () => {
     if (!editingUser) return;
     try {
-      await axios.put(`http://localhost:8000/api/auth/users/${editingUser.id}/`, {
+      await axios.put(`${API_BASE_URL}/api/auth/users/${editingUser.id}/`, {
         name: editAction === "edit" ? editName : undefined,
         email: editAction === "edit" ? editEmail : undefined,
         password: editAction === "password" ? editPassword : undefined
@@ -123,7 +124,7 @@ export default function ManageAccounts() {
   const handleEditTeamSave = async () => {
     if (!editingTeam) return;
     try {
-      await axios.put(`http://localhost:8000/api/auth/teams/${editingTeam.id}/`, {
+      await axios.put(`${API_BASE_URL}/api/auth/teams/${editingTeam.id}/`, {
         name: editTeamName,
         description: editTeamDesc,
         guide_id: editTeamGuide || null,

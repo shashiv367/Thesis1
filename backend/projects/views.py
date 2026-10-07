@@ -116,8 +116,11 @@ class GuideTaskListView(APIView):
     def get(self, request):
         if request.user.role != "guide":
             return Response({"error": "Forbidden"}, status=403)
-        tasks = Task.objects.filter(created_by=request.user).prefetch_related(
-            "assignments__team"
+        tasks = (
+            Task.objects.filter(created_by=request.user)
+            .select_related("created_by")
+            .prefetch_related("assignments__team")
+            .order_by("-created_at")
         )
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
@@ -230,7 +233,13 @@ class StudentTaskListView(APIView):
         if request.user.role != "student":
             return Response({"error": "Forbidden"}, status=403)
         student_teams = request.user.teams.all()
-        tasks = Task.objects.filter(assignments__team__in=student_teams).distinct()
+        tasks = (
+            Task.objects.filter(assignments__team__in=student_teams)
+            .distinct()
+            .select_related("created_by")
+            .prefetch_related("assignments__team")
+            .order_by("-created_at")
+        )
         return Response(TaskSerializer(tasks, many=True).data)
 
 
@@ -243,15 +252,20 @@ class TaskSubmissionListView(APIView):
 
     def get(self, request):
         user = request.user
+        base_qs = TaskSubmission.objects.select_related(
+            "student", "task", "evaluated_by"
+        )
         if user.role == "student":
-            subs = TaskSubmission.objects.filter(student=user)
+            subs = base_qs.filter(student=user).order_by("-submitted_at")
         elif user.role == "guide":
             guide_teams = Team.objects.filter(guide=user)
-            subs = TaskSubmission.objects.filter(
-                task__assignments__team__in=guide_teams
-            ).distinct()
+            subs = (
+                base_qs.filter(task__assignments__team__in=guide_teams)
+                .distinct()
+                .order_by("-submitted_at")
+            )
         else:
-            subs = TaskSubmission.objects.all()
+            subs = base_qs.all().order_by("-submitted_at")
         return Response(TaskSubmissionSerializer(subs, many=True).data)
 
     def post(self, request):
@@ -317,9 +331,9 @@ class TaskSubmissionListView(APIView):
                         s.save()
                         return
 
-                    from plagiarism_engine.analyzer import PlagiarismAnalyzer
+                    from plagiarism_engine.analyzer import get_analyzer
 
-                    analyzer = PlagiarismAnalyzer()
+                    analyzer = get_analyzer()
                     analyzer.index_document(f"sub_{s.id}", content)
                     score_val, matches = analyzer.check_plagiarism(content)
 
@@ -342,6 +356,46 @@ class TaskSubmissionListView(APIView):
         return Response(serializer.errors, status=400)
 
 
+import os
+import mimetypes
+from django.http import FileResponse, Http404
+from django.utils.decorators import method_decorator
+from django.views.decorators.clickjacking import xframe_options_exempt
+
+class TaskSubmissionPreviewView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @method_decorator(xframe_options_exempt)
+    def get(self, request, pk):
+        try:
+            sub = TaskSubmission.objects.get(pk=pk)
+        except TaskSubmission.DoesNotExist:
+            raise Http404
+
+        user = request.user
+        if user.role == "guide":
+            guide_teams = Team.objects.filter(guide=user)
+            if not sub.task.assignments.filter(team__in=guide_teams).exists():
+                if sub.task.assignment_type != "global" and sub.task.created_by != user:
+                    return Response({"error": "Forbidden"}, status=403)
+        elif user.role == "student":
+            if sub.student != user:
+                return Response({"error": "Forbidden"}, status=403)
+        else:
+            return Response({"error": "Forbidden"}, status=403)
+
+        if not sub.file or not hasattr(sub.file, 'path') or not os.path.exists(sub.file.path):
+            raise Http404
+
+        content_type, _ = mimetypes.guess_type(sub.file.name)
+        if not content_type:
+            content_type = 'application/octet-stream'
+
+        response = FileResponse(open(sub.file.path, 'rb'), content_type=content_type)
+        response['Content-Disposition'] = f'inline; filename="{os.path.basename(sub.file.name)}"'
+        return response
+
+
 class TaskSubmissionDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -352,8 +406,14 @@ class TaskSubmissionDetailView(APIView):
             return None, Response({"error": "Not found"}, status=404)
         if user.role == "guide":
             guide_teams = Team.objects.filter(guide=user)
-            if not sub.task.assignments.filter(team__in=guide_teams).exists():
-                return None, Response({"error": "Forbidden"}, status=403)
+            has_permission = sub.task.assignments.filter(team__in=guide_teams).exists()
+            print(f"DEBUG: Guide {user.id} accessing sub {sub.id}. Guide teams: {list(guide_teams.values_list('id', flat=True))}. Sub task assignments: {list(sub.task.assignments.values_list('team_id', flat=True))}. Has permission: {has_permission}")
+            if not has_permission:
+                # Also check if it's a global task or guide created it
+                if sub.task.assignment_type == "global" or sub.task.created_by == user:
+                    pass # allow if global or created by guide
+                else:
+                    return None, Response({"error": "Forbidden"}, status=403)
         elif user.role == "student":
             if sub.student != user:
                 return None, Response({"error": "Forbidden"}, status=403)
@@ -441,9 +501,9 @@ class TaskSubmissionDetailView(APIView):
                         status=400,
                     )
 
-                from plagiarism_engine.analyzer import PlagiarismAnalyzer
+                from plagiarism_engine.analyzer import get_analyzer
 
-                analyzer = PlagiarismAnalyzer()
+                analyzer = get_analyzer()
                 # Index current doc so future submissions compare against it
                 analyzer.index_document(f"sub_{sub.id}", content)
                 score_val, matches = analyzer.check_plagiarism(content)
@@ -477,11 +537,8 @@ class GuideOverviewView(APIView):
         if request.user.role != "guide":
             return Response({"error": "Forbidden"}, status=403)
         guide = request.user
-        guide_teams = Team.objects.filter(guide=guide).prefetch_related("students")
-        all_students = set()
-        for t in guide_teams:
-            for s in t.students.all():
-                all_students.add(s.id)
+        guide_teams = Team.objects.filter(guide=guide)
+        student_count = User.objects.filter(teams__in=guide_teams).distinct().count()
 
         tasks = Task.objects.filter(created_by=guide)
         now = timezone.now()
@@ -492,20 +549,26 @@ class GuideOverviewView(APIView):
         evaluated_subs = subs.filter(status="evaluated").count()
         avg_score = subs.filter(score__isnull=False).aggregate(a=Avg("score"))["a"]
 
+        recent_tasks = (
+            tasks.select_related("created_by")
+            .prefetch_related("assignments__team")
+            .order_by("-created_at")[:5]
+        )
+        recent_subs = (
+            subs.select_related("student", "task", "evaluated_by")
+            .order_by("-submitted_at")[:5]
+        )
+
         return Response(
             {
                 "teams": guide_teams.count(),
-                "students": len(all_students),
+                "students": student_count,
                 "active_tasks": active_tasks,
                 "pending_submissions": pending_subs,
                 "evaluated_submissions": evaluated_subs,
                 "avg_score": round(avg_score, 1) if avg_score is not None else None,
-                "recent_tasks": TaskSerializer(
-                    tasks.order_by("-created_at")[:5], many=True
-                ).data,
-                "recent_submissions": TaskSubmissionSerializer(
-                    subs.order_by("-submitted_at")[:5], many=True
-                ).data,
+                "recent_tasks": TaskSerializer(recent_tasks, many=True).data,
+                "recent_submissions": TaskSubmissionSerializer(recent_subs, many=True).data,
             }
         )
 

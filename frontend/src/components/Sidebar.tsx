@@ -89,7 +89,13 @@ export default function Sidebar() {
             <span>Settings</span>
           </Link>
         )}
-        <Link href="/" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-900/30 text-red-400 transition-colors">
+        <Link 
+          href="/" 
+          onClick={() => {
+            localStorage.clear();
+          }}
+          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-red-900/30 text-red-400 transition-colors"
+        >
           <LogOut size={20} />
           <span>Logout</span>
         </Link>

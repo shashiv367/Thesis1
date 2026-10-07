@@ -10,9 +10,11 @@ class PlagiarismAnalyzer:
             name=collection_name
         )
 
-        # Load a lightweight, fast semantic embedding model
-        # This converts text chunks into dense vectors
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        # Load a lightweight, fast semantic embedding model from local cache
+        try:
+            self.model = SentenceTransformer("all-MiniLM-L6-v2", local_files_only=True)
+        except Exception:
+            self.model = SentenceTransformer("all-MiniLM-L6-v2")
 
     def chunk_text(self, text, chunk_size=150):
         """Splits the document into smaller semantic chunks (e.g., ~150 words)."""
@@ -28,7 +30,7 @@ class PlagiarismAnalyzer:
         if not chunks:
             return
 
-        embeddings = self.model.encode(chunks).tolist()
+        embeddings = self.model.encode(chunks, show_progress_bar=False, batch_size=32).tolist()
 
         ids = [f"{doc_id}_chunk_{i}" for i in range(len(chunks))]
         metadatas = [metadata or {"doc_id": doc_id} for _ in chunks]
@@ -46,7 +48,7 @@ class PlagiarismAnalyzer:
         if not chunks:
             return 0.0, []
 
-        embeddings = self.model.encode(chunks).tolist()
+        embeddings = self.model.encode(chunks, show_progress_bar=False, batch_size=32).tolist()
 
         # Search the vector DB for the closest match for each chunk
         results = self.collection.query(query_embeddings=embeddings, n_results=1)
@@ -75,3 +77,12 @@ class PlagiarismAnalyzer:
 
         score = (plagiarized_chunks / total_chunks) * 100
         return round(score, 2), matches
+
+
+_analyzer_instance = None
+
+def get_analyzer():
+    global _analyzer_instance
+    if _analyzer_instance is None:
+        _analyzer_instance = PlagiarismAnalyzer()
+    return _analyzer_instance
