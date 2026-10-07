@@ -1,31 +1,107 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+"use client";
 
-export default function LandingPage() {
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    
+    try {
+      const response = await axios.post("http://localhost:8000/api/auth/login/", {
+        username,
+        password
+      });
+      
+      const { token, role } = response.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", username);
+      
+      if (role === "admin") {
+        router.push("/dashboard/admin");
+      } else if (role === "guide") {
+        router.push("/dashboard/guide");
+      } else {
+        router.push("/dashboard/student");
+      }
+    } catch (err) {
+      setError("Invalid username or password. Please try again.");
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
-      <div className="max-w-3xl space-y-8 z-10">
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900">
-          Manage research with <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-700 to-green-900">confidence</span>.
-        </h1>
+    <div className="min-h-screen bg-slate-50 flex">
+      {/* Left Column - Form */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-24 relative bg-gray-50 overflow-hidden">
         
-        <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          ThesisGuard unifies the academic lifecycle. Secure milestone tracking, streamlined guide assignments, and advanced AI-powered semantic plagiarism detection.
-        </p>
+        {/* Dark Green Bubble Shades */}
+        <div className="absolute top-[-10%] left-[-20%] w-[500px] h-[500px] bg-[#3c5a3d] rounded-full filter blur-[100px] opacity-40"></div>
+        <div className="absolute bottom-[-10%] right-[-20%] w-[600px] h-[600px] bg-[#1b2b1c] rounded-full filter blur-[120px] opacity-30 animate-pulse"></div>
         
-        <div className="pt-8">
-          <Link 
-            href="/login" 
-            className="inline-flex items-center space-x-2 bg-green-900 hover:bg-green-800 text-white px-8 py-4 rounded-full font-semibold transition-all shadow-[0_8px_30px_rgb(20,83,45,0.25)] hover:-translate-y-1"
-          >
-            <span>Login to Portal</span>
-            <ArrowRight size={20} />
-          </Link>
+        <div className="relative z-10 w-full max-w-md mx-auto bg-white/80 backdrop-blur-xl p-8 md:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.12)] border border-white/60">
+          <div className="mb-10 text-center">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">Sign In</h1>
+            <p className="text-gray-500 mt-2 text-sm">Welcome back to ThesisGuard</p>
+          </div>
+          
+          <form onSubmit={handleLogin} className="space-y-6">
+            {error && (
+              <div className="bg-red-50 text-red-700 p-3 rounded-xl text-sm text-center border border-red-100 font-medium">
+                {error}
+              </div>
+            )}
+            
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700">Username</label>
+              <input 
+                type="text" 
+                required 
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-4 focus:ring-[#3c5a3d]/10 focus:border-[#3c5a3d] outline-none transition-all text-gray-900 placeholder-gray-400"
+                placeholder="Enter your username" 
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-gray-700">Password</label>
+              <input 
+                type="password" 
+                required 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl focus:ring-4 focus:ring-[#3c5a3d]/10 focus:border-[#3c5a3d] outline-none transition-all text-gray-900 placeholder-gray-400"
+                placeholder="Enter your password" 
+              />
+            </div>
+
+            <div className="pt-4">
+              <button 
+                type="submit" 
+                className="w-full bg-[#2c402d] hover:bg-[#1b2b1c] text-white font-semibold py-3.5 px-4 rounded-xl transition-all shadow-[0_4px_14px_0_rgb(60,90,61,0.39)] hover:shadow-[0_6px_20px_rgba(60,90,61,0.23)] hover:-translate-y-0.5"
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-      
-      {/* Decorative background elements */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-50 rounded-full blur-3xl -z-10 pointer-events-none" />
+
+      {/* Right Column - Image */}
+      <div className="hidden md:block w-1/2 relative bg-gray-50 border-l border-gray-100">
+        <img 
+          src="/monstera.jpg"
+          alt="Plant leaves"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
     </div>
   );
 }

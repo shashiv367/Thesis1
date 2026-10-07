@@ -13,30 +13,30 @@ interface UserProfile {
   created_at?: string;
 }
 
-interface Milestone {
+interface Task {
   id: number;
   title: string;
   deadline: string;
-  is_completed: boolean;
-  project: number;
 }
 
-interface Submission {
+interface TaskSubmission {
   id: number;
-  milestone: number;
+  task: number;
   file: string;
   submitted_at: string;
   plagiarism_score: number | null;
   feedback: string;
   student: number;
+  score: number | null;
+  status: string;
 }
 
 export default function StudentDashboard() {
   const [activeTab, setActiveTab] = useState<"overview" | "upload" | "tasks" | "submissions" | "grades" | "settings">("upload");
   
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [milestones, setMilestones] = useState<Milestone[]>([]);
-  const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [submissions, setSubmissions] = useState<TaskSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   
   // Settings Form
@@ -60,13 +60,15 @@ export default function StudentDashboard() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [profileRes, msRes, subRes] = await Promise.all([
+      const [profileRes, taskRes, subRes] = await Promise.all([
         axios.get("http://localhost:8000/api/auth/users/me/", getHeaders()),
-        axios.get("http://localhost:8000/api/milestones/", getHeaders()),
-        axios.get("http://localhost:8000/api/submissions/", getHeaders())
+        axios.get("http://localhost:8000/api/student/tasks/", getHeaders()),
+        axios.get("http://localhost:8000/api/task-submissions/", getHeaders())
       ]);
+      console.log("Tasks:", taskRes.data);
+      console.log("Submissions:", subRes.data);
       setProfile(profileRes.data);
-      setMilestones(msRes.data);
+      setTasks(taskRes.data);
       setSubmissions(subRes.data);
     } catch (err) {
       console.error("Error fetching student data", err);
@@ -132,10 +134,10 @@ export default function StudentDashboard() {
     setIsUploading(true);
     const formData = new FormData();
     formData.append("file", uploadFile);
-    formData.append("milestone", uploadTask.toString());
+    formData.append("task", uploadTask.toString());
 
     try {
-      await axios.post("http://localhost:8000/api/submissions/", formData, {
+      await axios.post("http://localhost:8000/api/task-submissions/", formData, {
         headers: {
           ...getHeaders().headers,
           "Content-Type": "multipart/form-data"
@@ -159,16 +161,16 @@ export default function StudentDashboard() {
     });
   };
 
-  const getTaskStatus = (milestoneId: number) => {
-    const subs = submissions.filter(s => s.milestone === milestoneId);
+  const getTaskStatus = (taskId: number) => {
+    const subs = submissions.filter(s => s.task === taskId);
     if (subs.length > 0) return "Submitted";
-    const m = milestones.find(m => m.id === milestoneId);
+    const m = tasks.find(m => m.id === taskId);
     if (m && new Date(m.deadline) < new Date()) return "Late";
     return "Pending";
   };
 
-  const getTaskScore = (milestoneId: number) => {
-    const subs = submissions.filter(s => s.milestone === milestoneId);
+  const getTaskScore = (taskId: number) => {
+    const subs = submissions.filter(s => s.task === taskId);
     if (subs.length === 0) return "—";
     const sub = subs[subs.length - 1]; // latest
     return sub.plagiarism_score !== null ? `${sub.plagiarism_score}/100` : "Pending";
@@ -188,7 +190,7 @@ export default function StudentDashboard() {
     return <div className="flex h-full items-center justify-center p-12 text-gray-500">Loading your dashboard...</div>;
   }
 
-  const submittedTasksCount = new Set(submissions.map(s => s.milestone)).size;
+  const submittedTasksCount = new Set(submissions.map(s => s.task)).size;
   const gradedSubmissions = submissions.filter(s => s.plagiarism_score !== null);
   const avgScore = gradedSubmissions.length > 0 
     ? (gradedSubmissions.reduce((acc, curr) => acc + (curr.plagiarism_score || 0), 0) / gradedSubmissions.length).toFixed(1)
@@ -211,11 +213,11 @@ export default function StudentDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center">
               <p className="text-gray-500 font-medium text-sm">Total Tasks</p>
-              <h3 className="text-3xl font-bold text-gray-800 mt-2">{milestones.length}</h3>
+              <h3 className="text-3xl font-bold text-gray-800 mt-2">{tasks.length}</h3>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center">
               <p className="text-orange-500 font-medium text-sm">Pending Tasks</p>
-              <h3 className="text-3xl font-bold text-orange-700 mt-2">{milestones.length - submittedTasksCount}</h3>
+              <h3 className="text-3xl font-bold text-orange-700 mt-2">{tasks.length - submittedTasksCount}</h3>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center">
               <p className="text-blue-500 font-medium text-sm">Submitted Tasks</p>
@@ -230,11 +232,11 @@ export default function StudentDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
               <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center"><Clock className="w-5 h-5 mr-2 text-gray-400" /> Recent Tasks</h2>
-              {milestones.length === 0 ? (
+              {tasks.length === 0 ? (
                 <p className="text-gray-400 italic">No tasks assigned yet.</p>
               ) : (
                 <div className="space-y-4">
-                  {milestones.slice(0, 5).map(m => (
+                  {tasks.slice(0, 5).map(m => (
                     <div key={m.id} className="flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg border border-gray-100">
                       <div>
                         <p className="font-semibold text-gray-800">{m.title}</p>
@@ -255,7 +257,7 @@ export default function StudentDashboard() {
               ) : (
                 <div className="space-y-4">
                   {submissions.slice().reverse().slice(0, 5).map(s => {
-                    const m = milestones.find(ms => ms.id === s.milestone);
+                    const m = tasks.find(ms => ms.id === s.task);
                     return (
                       <div key={s.id} className="flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg border border-gray-100">
                         <div>
@@ -295,7 +297,7 @@ export default function StudentDashboard() {
                   className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-700 outline-none text-gray-900"
                 >
                   <option value="">-- Choose a pending task --</option>
-                  {milestones.filter(m => getTaskStatus(m.id) !== 'Submitted').map(m => (
+                  {tasks.filter(m => getTaskStatus(m.id) !== 'Submitted').map(m => (
                     <option key={m.id} value={m.id}>{m.title} (Due: {formatDate(m.deadline)})</option>
                   ))}
                 </select>
@@ -345,7 +347,7 @@ export default function StudentDashboard() {
             ) : (
               <div className="space-y-4">
                 {submissions.slice().reverse().slice(0, 5).map(s => {
-                  const m = milestones.find(ms => ms.id === s.milestone);
+                  const m = tasks.find(ms => ms.id === s.task);
                   const filename = s.file.split('/').pop() || "Document";
                   return (
                     <div key={s.id} className="p-3 border border-gray-100 rounded-lg hover:shadow-sm transition-shadow">
@@ -380,10 +382,10 @@ export default function StudentDashboard() {
                 </tr>
               </thead>
               <tbody className="text-sm text-gray-700 divide-y divide-gray-100">
-                {milestones.length === 0 ? (
+                {tasks.length === 0 ? (
                   <tr><td colSpan={4} className="py-8 text-center text-gray-400">No tasks assigned yet.</td></tr>
                 ) : (
-                  milestones.map(m => (
+                  tasks.map(m => (
                     <tr key={m.id} className="hover:bg-gray-50 transition-colors">
                       <td className="py-4 font-semibold text-gray-900">{m.title}</td>
                       <td className="py-4">{formatDate(m.deadline)}</td>
@@ -427,7 +429,7 @@ export default function StudentDashboard() {
                   <tr><td colSpan={5} className="py-8 text-center text-gray-400">No submissions yet.</td></tr>
                 ) : (
                   submissions.map(s => {
-                    const m = milestones.find(ms => ms.id === s.milestone);
+                    const m = tasks.find(ms => ms.id === s.task);
                     const filename = s.file.split('/').pop() || "Document";
                     return (
                       <tr key={s.id} className="hover:bg-gray-50 transition-colors">
@@ -444,7 +446,7 @@ export default function StudentDashboard() {
                           </span>
                         </td>
                         <td className="py-4 text-right font-medium">
-                          {getTaskScore(s.milestone)}
+                          {getTaskScore(s.task)}
                         </td>
                       </tr>
                     );
@@ -470,13 +472,13 @@ export default function StudentDashboard() {
                 </tr>
               </thead>
               <tbody className="text-sm text-gray-700 divide-y divide-gray-100">
-                {milestones.length === 0 ? (
+                {tasks.length === 0 ? (
                   <tr><td colSpan={4} className="py-8 text-center text-gray-400">No grades available yet.</td></tr>
                 ) : (
-                  milestones.map(m => {
+                  tasks.map(m => {
                     const score = getTaskScore(m.id);
                     const grade = getTaskGrade(score);
-                    const subs = submissions.filter(s => s.milestone === m.id);
+                    const subs = submissions.filter(s => s.task === m.id);
                     const latestSub = subs.length > 0 ? subs[subs.length - 1] : null;
                     return (
                       <tr key={m.id} className="hover:bg-gray-50 transition-colors">

@@ -6,20 +6,44 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Team',
+            name="Team",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('guide', models.ForeignKey(blank=True, limit_choices_to={'role': 'guide'}, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='guided_teams', to=settings.AUTH_USER_MODEL)),
-                ('students', models.ManyToManyField(limit_choices_to={'role': 'student'}, related_name='teams', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
+                ("description", models.TextField(blank=True, null=True)),
+                (
+                    "guide",
+                    models.ForeignKey(
+                        blank=True,
+                        limit_choices_to={"role": "guide"},
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="guided_teams",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "students",
+                    models.ManyToManyField(
+                        limit_choices_to={"role": "student"},
+                        related_name="teams",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

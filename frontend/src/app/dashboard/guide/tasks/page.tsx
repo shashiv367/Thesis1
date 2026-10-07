@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ListTodo, Plus, Trash2, Clock } from "lucide-react";
+import { ListTodo, Plus, Trash2, Clock, Edit } from "lucide-react";
 
 interface Team { id: number; name: string; }
 interface TaskAssignment { id: number; team: number; team_name: string; }
@@ -27,6 +27,8 @@ export default function GuideTasks() {
   const [formMsg, setFormMsg] = useState({ type: "", text: "" });
   const [submitting, setSubmitting] = useState(false);
 
+  const [editId, setEditId] = useState<number | null>(null);
+
   const getHeaders = () => ({
     headers: { Authorization: `Token ${localStorage.getItem("token")}` }
   });
@@ -46,23 +48,49 @@ export default function GuideTasks() {
 
   useEffect(() => { fetchData(); }, []);
 
+  const handleEdit = (t: Task) => {
+    setEditId(t.id);
+    setTitle(t.title);
+    setDescription(t.description);
+    setInstructions(t.instructions);
+    
+    // Format datetime string for input type="datetime-local" (YYYY-MM-DDThh:mm)
+    const d = new Date(t.deadline);
+    const ds = d.toISOString().slice(0, 16);
+    setDeadline(ds);
+    
+    setAssignType(t.assignment_type as any);
+    setSelectedTeams(t.assignments.map(a => a.team));
+    setShowForm(true);
+    setFormMsg({ type: "", text: "" });
+  };
+
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormMsg({ type: "", text: "" });
     setSubmitting(true);
     try {
-      await axios.post("http://localhost:8000/api/guide/tasks/", {
+      const payload = {
         title, description, instructions, deadline,
         assignment_type: assignType,
         team_ids: assignType === "specific" ? selectedTeams : [],
-      }, getHeaders());
-      setFormMsg({ type: "success", text: "Task created successfully!" });
+      };
+      
+      if (editId) {
+        await axios.put(`http://localhost:8000/api/guide/tasks/${editId}/`, payload, getHeaders());
+        setFormMsg({ type: "success", text: "Task updated successfully!" });
+      } else {
+        await axios.post("http://localhost:8000/api/guide/tasks/", payload, getHeaders());
+        setFormMsg({ type: "success", text: "Task created successfully!" });
+      }
+      
       setTitle(""); setDescription(""); setInstructions(""); setDeadline("");
       setSelectedTeams([]);
+      setEditId(null);
       setShowForm(false);
       fetchData();
     } catch (err: any) {
-      setFormMsg({ type: "error", text: err.response?.data?.error || "Failed to create task." });
+      setFormMsg({ type: "error", text: err.response?.data?.error || "Failed to save task." });
     } finally { setSubmitting(false); }
   };
 
@@ -87,15 +115,15 @@ export default function GuideTasks() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-800">Tasks</h1>
-        <button onClick={() => { setShowForm(!showForm); setFormMsg({ type: "", text: "" }); }}
+        <button onClick={() => { setShowForm(!showForm); setFormMsg({ type: "", text: "" }); setEditId(null); setTitle(""); setDescription(""); setInstructions(""); setDeadline(""); setSelectedTeams([]); }}
           className="flex items-center bg-green-900 hover:bg-green-800 text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-md">
-          <Plus className="w-4 h-4 mr-2" /> Create Task
+          <Plus className="w-4 h-4 mr-2" /> {showForm ? "Cancel" : "Create Task"}
         </button>
       </div>
 
       {showForm && (
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Create New Task</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">{editId ? "Edit Task" : "Create New Task"}</h2>
           {formMsg.text && (
             <div className={`mb-4 p-3 rounded-lg text-sm border ${formMsg.type === "error" ? "bg-red-50 text-red-700 border-red-200" : "bg-green-50 text-green-700 border-green-200"}`}>
               {formMsg.text}
@@ -148,7 +176,7 @@ export default function GuideTasks() {
               <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">Cancel</button>
               <button type="submit" disabled={submitting}
                 className="px-6 py-2 bg-green-900 hover:bg-green-800 text-white rounded-lg font-medium transition-colors disabled:opacity-60">
-                {submitting ? "Creating..." : "Create Task"}
+                {submitting ? "Saving..." : (editId ? "Save Changes" : "Create Task")}
               </button>
             </div>
           </form>
@@ -195,6 +223,9 @@ export default function GuideTasks() {
                         <span className={`text-xs px-2 py-1 rounded-full font-medium ${st.cls}`}>{st.label}</span>
                       </td>
                       <td className="py-4 text-right">
+                        <button onClick={() => handleEdit(t)} className="text-blue-600 hover:bg-blue-50 p-2 rounded-lg inline-flex mr-1">
+                          <Edit className="w-4 h-4" />
+                        </button>
                         <button onClick={() => handleDelete(t.id)} className="text-red-600 hover:bg-red-50 p-2 rounded-lg inline-flex">
                           <Trash2 className="w-4 h-4" />
                         </button>

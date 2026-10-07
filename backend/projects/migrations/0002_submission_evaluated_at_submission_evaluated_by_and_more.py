@@ -7,94 +7,214 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('projects', '0001_initial'),
-        ('users', '0002_team'),
+        ("projects", "0001_initial"),
+        ("users", "0002_team"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='submission',
-            name='evaluated_at',
+            model_name="submission",
+            name="evaluated_at",
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='submission',
-            name='evaluated_by',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='evaluations_given', to=settings.AUTH_USER_MODEL),
+            model_name="submission",
+            name="evaluated_by",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="evaluations_given",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='submission',
-            name='grade',
+            model_name="submission",
+            name="grade",
             field=models.CharField(blank=True, max_length=5),
         ),
         migrations.AddField(
-            model_name='submission',
-            name='plagiarism_matches',
+            model_name="submission",
+            name="plagiarism_matches",
             field=models.JSONField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='submission',
-            name='plagiarism_status',
-            field=models.CharField(choices=[('not_checked', 'Not Checked'), ('processing', 'Processing'), ('completed', 'Completed'), ('failed', 'Failed')], default='not_checked', max_length=20),
+            model_name="submission",
+            name="plagiarism_status",
+            field=models.CharField(
+                choices=[
+                    ("not_checked", "Not Checked"),
+                    ("processing", "Processing"),
+                    ("completed", "Completed"),
+                    ("failed", "Failed"),
+                ],
+                default="not_checked",
+                max_length=20,
+            ),
         ),
         migrations.AddField(
-            model_name='submission',
-            name='score',
+            model_name="submission",
+            name="score",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='submission',
-            name='file',
-            field=models.FileField(upload_to='submissions/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx'])]),
+            model_name="submission",
+            name="file",
+            field=models.FileField(
+                upload_to="submissions/",
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        allowed_extensions=["pdf", "doc", "docx"]
+                    )
+                ],
+            ),
         ),
         migrations.CreateModel(
-            name='Task',
+            name="Task",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('description', models.TextField(blank=True)),
-                ('instructions', models.TextField(blank=True)),
-                ('deadline', models.DateTimeField()),
-                ('assignment_type', models.CharField(choices=[('specific', 'Specific Team'), ('global', 'Global')], default='specific', max_length=10)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='created_tasks', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("description", models.TextField(blank=True)),
+                ("instructions", models.TextField(blank=True)),
+                ("deadline", models.DateTimeField()),
+                (
+                    "assignment_type",
+                    models.CharField(
+                        choices=[("specific", "Specific Team"), ("global", "Global")],
+                        default="specific",
+                        max_length=10,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="created_tasks",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TaskAssignment',
+            name="TaskAssignment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='assignments', to='projects.task')),
-                ('team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='task_assignments', to='users.team')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "task",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="assignments",
+                        to="projects.task",
+                    ),
+                ),
+                (
+                    "team",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="task_assignments",
+                        to="users.team",
+                    ),
+                ),
             ],
             options={
-                'unique_together': {('task', 'team')},
+                "unique_together": {("task", "team")},
             },
         ),
         migrations.CreateModel(
-            name='TaskSubmission',
+            name="TaskSubmission",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.FileField(upload_to='task_submissions/', validators=[django.core.validators.FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx'])])),
-                ('comments', models.TextField(blank=True)),
-                ('submitted_at', models.DateTimeField(auto_now_add=True)),
-                ('status', models.CharField(choices=[('submitted', 'Submitted'), ('under_review', 'Under Review'), ('evaluated', 'Evaluated')], default='submitted', max_length=20)),
-                ('plagiarism_score', models.FloatField(blank=True, null=True)),
-                ('plagiarism_status', models.CharField(default='not_checked', max_length=20)),
-                ('plagiarism_matches', models.JSONField(blank=True, null=True)),
-                ('score', models.FloatField(blank=True, null=True)),
-                ('grade', models.CharField(blank=True, max_length=5)),
-                ('feedback', models.TextField(blank=True)),
-                ('evaluated_at', models.DateTimeField(blank=True, null=True)),
-                ('evaluated_by', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='task_evaluations_given', to=settings.AUTH_USER_MODEL)),
-                ('student', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='task_submissions', to=settings.AUTH_USER_MODEL)),
-                ('task', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='task_submissions', to='projects.task')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "file",
+                    models.FileField(
+                        upload_to="task_submissions/",
+                        validators=[
+                            django.core.validators.FileExtensionValidator(
+                                allowed_extensions=["pdf", "doc", "docx"]
+                            )
+                        ],
+                    ),
+                ),
+                ("comments", models.TextField(blank=True)),
+                ("submitted_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("submitted", "Submitted"),
+                            ("under_review", "Under Review"),
+                            ("evaluated", "Evaluated"),
+                        ],
+                        default="submitted",
+                        max_length=20,
+                    ),
+                ),
+                ("plagiarism_score", models.FloatField(blank=True, null=True)),
+                (
+                    "plagiarism_status",
+                    models.CharField(default="not_checked", max_length=20),
+                ),
+                ("plagiarism_matches", models.JSONField(blank=True, null=True)),
+                ("score", models.FloatField(blank=True, null=True)),
+                ("grade", models.CharField(blank=True, max_length=5)),
+                ("feedback", models.TextField(blank=True)),
+                ("evaluated_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "evaluated_by",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="task_evaluations_given",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "student",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="task_submissions",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "task",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="task_submissions",
+                        to="projects.task",
+                    ),
+                ),
             ],
             options={
-                'unique_together': {('task', 'student')},
+                "unique_together": {("task", "student")},
             },
         ),
     ]

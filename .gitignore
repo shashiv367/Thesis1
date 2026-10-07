@@ -17,3 +17,5 @@ env/
 
 # Node.js
 node_modules/
+sample_data/clean_submission.pdf
+sample_data/plagiarized_submission.pdf
