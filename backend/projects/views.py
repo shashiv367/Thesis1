@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from users.models import Team
+from users.models import Team, User
 
 from .models import Milestone, Project, Submission, Task, TaskAssignment, TaskSubmission
 from .serializers import (
