@@ -14,7 +14,7 @@ export default function Header() {
   });
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem("username");
+    const storedUsername = localStorage.getItem("Username");
     if (storedUsername) {
       setInitial(storedUsername.charAt(0).toUpperCase());
       return;
@@ -31,7 +31,7 @@ export default function Header() {
           const name = res.data.first_name || res.data.username;
           if (name) {
             setInitial(name.charAt(0).toUpperCase());
-            localStorage.setItem("username", name);
+            localStorage.setItem("Username", name);
           }
         }
       } catch (err) {
