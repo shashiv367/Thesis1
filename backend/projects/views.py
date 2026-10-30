@@ -17,6 +17,42 @@ from .serializers import (
     TaskSubmissionSerializer,
 )
 
+
+# ─── arXiv Corpus Builder View ─────────────────────────────────────────────────
+
+
+class ArxivCorpusBuildView(APIView):
+    """
+    Guide-only endpoint to fetch arXiv papers on a given topic
+    and index them into ChromaDB to build the RAG plagiarism corpus.
+
+    POST /api/guide/corpus/build/
+    Body: { "query": "plagiarism detection NLP", "max_results": 10 }
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        if request.user.role != "guide":
+            return Response({"error": "Forbidden: Guide access only."}, status=403)
+
+        query = request.data.get("query", "").strip()
+        if not query:
+            return Response({"error": "A 'query' field is required."}, status=400)
+
+        max_results = int(request.data.get("max_results", 10))
+        max_results = max(1, min(max_results, 50))  # Clamp between 1 and 50
+
+        try:
+            from plagiarism_engine.corpus_builder import build_corpus_from_arxiv
+            result = build_corpus_from_arxiv(query=query, max_results=max_results)
+            return Response(result, status=200)
+        except ConnectionError as e:
+            return Response({"error": str(e)}, status=503)
+        except Exception as e:
+            return Response({"error": f"Corpus build failed: {str(e)}"}, status=500)
+
+
+
 # ─── Shared permission helper ─────────────────────────────────────────────────
 
 
@@ -293,60 +329,40 @@ class TaskSubmissionListView(APIView):
             import threading
 
             from django.db import connection
+            from plagiarism_engine.analyzer import extract_text_from_file, get_analyzer
 
             def run_background_check(sub_id):
                 try:
                     from projects.models import TaskSubmission
-
                     s = TaskSubmission.objects.get(id=sub_id)
                     s.plagiarism_status = "processing"
                     s.save()
 
-                    import os
+                    if not s.file:
+                        s.plagiarism_status = "failed"
+                        s.save()
+                        return
 
-                    file_path = s.file.path
-                    ext = os.path.splitext(file_path)[1].lower()
-                    content = ""
-                    if ext == ".pdf":
-                        try:
-                            import PyPDF2
-
-                            with open(file_path, "rb") as f:
-                                reader = PyPDF2.PdfReader(f)
-                                for page in reader.pages:
-                                    content += page.extract_text() or ""
-                        except Exception:
-                            pass
-                    elif ext in [".doc", ".docx"]:
-                        try:
-                            import docx
-
-                            doc = docx.Document(file_path)
-                            content = " ".join([p.text for p in doc.paragraphs])
-                        except Exception:
-                            pass
-
+                    content = extract_text_from_file(s.file.path)
                     if not content.strip():
                         s.plagiarism_status = "failed"
                         s.save()
                         return
 
-                    from plagiarism_engine.analyzer import get_analyzer
-
                     analyzer = get_analyzer()
-                    analyzer.index_document(f"sub_{s.id}", content)
-                    score_val, matches = analyzer.check_plagiarism(content)
+                    score_val, matches = analyzer.analyze_submission(f"sub_{s.id}", content)
 
                     s.plagiarism_score = score_val
                     s.plagiarism_matches = matches
                     s.plagiarism_status = "completed"
                     s.save()
-                except Exception:
+                except Exception as err:
                     try:
+                        from projects.models import TaskSubmission
                         s = TaskSubmission.objects.get(id=sub_id)
                         s.plagiarism_status = "failed"
                         s.save()
-                    except:
+                    except Exception:
                         pass
                 finally:
                     connection.close()
@@ -462,41 +478,34 @@ class TaskSubmissionDetailView(APIView):
             return Response(TaskSubmissionSerializer(sub).data)
 
         elif action == "plagiarism":
-            # Run synchronous plagiarism check (Celery not required)
+            # Run fast single-pass plagiarism check
             sub.plagiarism_status = "processing"
             sub.save()
             try:
                 import os
 
+                if not sub.file:
+                    sub.plagiarism_status = "failed"
+                    sub.save()
+                    return Response({"error": "No file attached to this submission."}, status=400)
+
                 file_path = sub.file.path
-                ext = os.path.splitext(file_path)[1].lower()
+                if not os.path.exists(file_path):
+                    sub.plagiarism_status = "failed"
+                    sub.save()
+                    return Response(
+                        {"error": f"Submission file '{os.path.basename(file_path)}' not found on server disk."},
+                        status=404,
+                    )
+                from plagiarism_engine.analyzer import extract_text_from_file, get_analyzer
 
-                content = ""
-                if ext == ".pdf":
-                    try:
-                        import PyPDF2
-
-                        with open(file_path, "rb") as f:
-                            reader = PyPDF2.PdfReader(f)
-                            for page in reader.pages:
-                                content += page.extract_text() or ""
-                    except Exception:
-                        content = ""
-                elif ext in [".doc", ".docx"]:
-                    try:
-                        import docx
-
-                        doc = docx.Document(file_path)
-                        content = " ".join([p.text for p in doc.paragraphs])
-                    except Exception:
-                        content = ""
-
+                content = extract_text_from_file(file_path)
                 if not content.strip():
                     sub.plagiarism_status = "failed"
                     sub.save()
                     return Response(
                         {
-                            "error": "Could not extract text from document. Install PyPDF2/python-docx."
+                            "error": "Could not extract text from document. Ensure it is a valid, readable PDF or DOCX file."
                         },
                         status=400,
                     )
@@ -504,9 +513,8 @@ class TaskSubmissionDetailView(APIView):
                 from plagiarism_engine.analyzer import get_analyzer
 
                 analyzer = get_analyzer()
-                # Index current doc so future submissions compare against it
-                analyzer.index_document(f"sub_{sub.id}", content)
-                score_val, matches = analyzer.check_plagiarism(content)
+                # Fast single-pass analysis and indexing
+                score_val, matches = analyzer.analyze_submission(f"sub_{sub.id}", content)
 
                 sub.plagiarism_score = score_val
                 sub.plagiarism_matches = matches

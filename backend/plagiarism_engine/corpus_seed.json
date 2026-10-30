@@ -1,0 +1,484 @@
+[
+  {
+    "id": "sub_1_chunk_0",
+    "document": "Submission 1 (Plagiarized) Plants and other living organisms use a process called photosynthesis to change light energy into chemical energy. Later on, cellular respiration releases this energy to power the activities of the organism. The chemical energy is kept in carbohydrates like sugars and starches, created using water and carbon dioxide.",
+    "metadata": {
+      "doc_id": "sub_1",
+      "source": "submission"
+    }
+  },
+  {
+    "id": "sub_2_chunk_0",
+    "document": "Submission 2 (Original) The internal combustion engine is a heat engine in which the combustion of a fuel occurs with an oxidizer in a combustion chamber that is an integral part of the working fluid flow circuit. In an internal combustion engine, the expansion of the high-temperature and high-pressure gases produced by combustion applies direct force to some component of the engine.",
+    "metadata": {
+      "doc_id": "sub_2",
+      "source": "submission"
+    }
+  },
+  {
+    "id": "arxiv_2106.05764v1_chunk_0",
+    "document": "Identifying academic plagiarism is a pressing problem, among others, for research institutions, publishers, and funding organizations. Detection approaches proposed so far analyze lexical, syntactical, and semantic text similarity. These approaches find copied, moderately reworded, and literally translated text. However, reliably detecting disguised plagiarism, such as strong paraphrases, sense-for-sense translations, and the reuse of non-textual content and ideas, is an open research problem. The thesis addresses this problem by proposing plagiarism detection approaches that implement a different concept: analyzing non-textual content in academic documents, specifically citations, images, and mathematical content. To validate the effectiveness of the proposed detection approaches, the thesis presents five evaluations that use real cases of academic plagiarism and exploratory searches for unknown cases. The evaluation results show that non-textual content elements contain a high degree of semantic information, are language-independent, and largely immutable to the alterations that authors typically perform to conceal plagiarism. Analyzing non-textual content complements",
+    "metadata": {
+      "query": "plagiarism detection NLP academic thesis",
+      "title": "Analyzing Non-Textual Content Elements to Detect Academic Plagiarism",
+      "arxiv_id": "2106.05764v1",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2106.05764v1",
+      "published": "2021-06-10"
+    }
+  },
+  {
+    "id": "arxiv_2106.05764v1_chunk_1",
+    "document": "text-based detection approaches and increases the detection effectiveness, particularly for disguised forms of academic plagiarism. To demonstrate the benefit of combining non-textual and text-based detection methods, the thesis describes the first plagiarism detection system that integrates the analysis of citation-based, image-based, math-based, and text-based document similarity. The system's user interface employs visualizations that significantly reduce the effort and time users must invest in examining content similarity.",
+    "metadata": {
+      "arxiv_id": "2106.05764v1",
+      "title": "Analyzing Non-Textual Content Elements to Detect Academic Plagiarism",
+      "published": "2021-06-10",
+      "source": "arxiv",
+      "query": "plagiarism detection NLP academic thesis",
+      "url": "https://arxiv.org/abs/2106.05764v1"
+    }
+  },
+  {
+    "id": "arxiv_2105.12068v1_chunk_0",
+    "document": "The article gives an overview of the plagiarism domain, with focus on academic plagiarism. The article defines plagiarism, explains the origin of the term, as well as plagiarism related terms. It identifies the extent of the plagiarism domain and then focuses on the plagiarism subdomain of text documents, for which it gives an overview of current classifications and taxonomies and then proposes a more comprehensive classification according to several criteria: their origin and purpose, technical implementation, consequence, complexity of detection and according to the number of linguistic sources. The article suggests the new classification of academic plagiarism, describes sorts and methods of plagiarism, types and categories, approaches and phases of plagiarism detection, the classification of methods and algorithms for plagiarism detection. The title of the article explicitly targets the academic community, but it is sufficiently general and interdisciplinary, so it can be useful for many other professionals like software developers,",
+    "metadata": {
+      "url": "https://arxiv.org/abs/2105.12068v1",
+      "arxiv_id": "2105.12068v1",
+      "published": "2021-05-25",
+      "title": "Taxonomy of academic plagiarism methods",
+      "query": "plagiarism detection NLP academic thesis",
+      "source": "arxiv"
+    }
+  },
+  {
+    "id": "arxiv_2105.12068v1_chunk_1",
+    "document": "linguists and librarians.",
+    "metadata": {
+      "source": "arxiv",
+      "published": "2021-05-25",
+      "query": "plagiarism detection NLP academic thesis",
+      "arxiv_id": "2105.12068v1",
+      "title": "Taxonomy of academic plagiarism methods",
+      "url": "https://arxiv.org/abs/2105.12068v1"
+    }
+  },
+  {
+    "id": "arxiv_1801.08439v1_chunk_0",
+    "document": "Despite the effort put into the detection of academic plagiarism, it continues to be a ubiquitous problem spanning all disciplines. Various tools have been developed to assist human inspectors by automatically identifying suspicious documents. However, to our knowledge currently none of these tools use mathematical content for their analysis. This is problematic, because mathematical content potentially represents a significant amount of the scientific contribution in academic documents. Hence, ignoring mathematical content limits the detection of plagiarism considerably, especially in disciplines with frequent use of mathematics. This paper aims to help close this gap by providing an overview of existing approaches in mathematical information retrieval and an analysis of their applicability for different possible cases of mathematical plagiarism. I find that whereas syntax-based approaches perform particularly well in detecting undisguised plagiarism, structure-based and hybrid approaches promise to also detect forms of disguised mathematical plagiarism, such as plagiarism with renamed identifiers. However,",
+    "metadata": {
+      "title": "Analyzing Similarity in Mathematical Content To Enhance the Detection of Academic Plagiarism",
+      "source": "arxiv",
+      "published": "2018-01-25",
+      "url": "https://arxiv.org/abs/1801.08439v1",
+      "arxiv_id": "1801.08439v1",
+      "query": "plagiarism detection NLP academic thesis"
+    }
+  },
+  {
+    "id": "arxiv_1801.08439v1_chunk_1",
+    "document": "more research in this area is needed to enable the detection of more complex mathematical plagiarism: the scope of current approaches is restricted to the formula-level, an extension to the section-level is needed. Additionally, the general detection of equivalence transformations is currently not feasible. Despite these remaining problems, I conclude that the presented approaches could already be used for a basic automated detection system targeting mathematical plagiarism and therefore enhance current plagiarism detection systems.",
+    "metadata": {
+      "published": "2018-01-25",
+      "url": "https://arxiv.org/abs/1801.08439v1",
+      "title": "Analyzing Similarity in Mathematical Content To Enhance the Detection of Academic Plagiarism",
+      "source": "arxiv",
+      "arxiv_id": "1801.08439v1",
+      "query": "plagiarism detection NLP academic thesis"
+    }
+  },
+  {
+    "id": "arxiv_1906.11761v1_chunk_0",
+    "document": "Identifying academic plagiarism is a pressing task for educational and research institutions, publishers, and funding agencies. Current plagiarism detection systems reliably find instances of copied and moderately reworded text. However, reliably detecting concealed plagiarism, such as strong paraphrases, translations, and the reuse of nontextual content and ideas is an open research problem. In this paper, we extend our prior research on analyzing mathematical content and academic citations. Both are promising approaches for improving the detection of concealed academic plagiarism primarily in Science, Technology, Engineering and Mathematics (STEM). We make the following contributions: i) We present a two-stage detection process that combines similarity assessments of mathematical content, academic citations, and text. ii) We introduce new similarity measures that consider the order of mathematical features and outperform the measures in our prior research. iii) We compare the effectiveness of the math-based, citation-based, and text-based detection approaches using confirmed cases of academic plagiarism.",
+    "metadata": {
+      "query": "plagiarism detection NLP academic thesis",
+      "published": "2019-06-27",
+      "title": "Improving Academic Plagiarism Detection for STEM Documents by Analyzing Mathematical Content and Citations",
+      "url": "https://arxiv.org/abs/1906.11761v1",
+      "arxiv_id": "1906.11761v1",
+      "source": "arxiv"
+    }
+  },
+  {
+    "id": "arxiv_1906.11761v1_chunk_1",
+    "document": "iv) We demonstrate that the combined analysis of math-based and citation-based content features allows identifying potentially suspicious cases in a collection of 102K STEM documents. Overall, we show that analyzing the similarity of mathematical content and academic citations is a striking supplement for conventional text-based detection approaches for academic literature in the STEM disciplines.",
+    "metadata": {
+      "published": "2019-06-27",
+      "query": "plagiarism detection NLP academic thesis",
+      "source": "arxiv",
+      "title": "Improving Academic Plagiarism Detection for STEM Documents by Analyzing Mathematical Content and Citations",
+      "url": "https://arxiv.org/abs/1906.11761v1",
+      "arxiv_id": "1906.11761v1"
+    }
+  },
+  {
+    "id": "arxiv_2112.13742v1_chunk_0",
+    "document": "In recent years, due to the high availability of electronic documents through the Web, the plagiarism has become a serious challenge, especially among scholars. Various plagiarism detection systems have been developed to prevent text re-use and to confront plagiarism. Although it is almost easy to detect duplicate text in academic manuscripts, finding patterns of text re-use that has been semantically changed is of great importance. Another important issue is to deal with less resourced languages, which there are low volume of text for training purposes and also low performance in tools for NLP applications. In this paper, we introduce Hamtajoo, a Persian plagiarism detection system for academic manuscripts. Moreover, we describe the overall structure of the system along with the algorithms used in each stage. In order to evaluate the performance of the proposed system, we used a plagiarism detection corpus comply with the PAN standards.",
+    "metadata": {
+      "arxiv_id": "2112.13742v1",
+      "query": "plagiarism detection NLP academic thesis",
+      "title": "Hamtajoo: A Persian Plagiarism Checker for Academic Manuscripts",
+      "url": "https://arxiv.org/abs/2112.13742v1",
+      "source": "arxiv",
+      "published": "2021-12-27"
+    }
+  },
+  {
+    "id": "sub_test_chunk_0",
+    "document": "This is a test of the plagiarism analyzer.",
+    "metadata": {
+      "source": "submission",
+      "doc_id": "sub_test"
+    }
+  },
+  {
+    "id": "sub_4_chunk_0",
+    "document": "Antecedents of Commitment to an Import Supplier Submitted by Md. Abu Saleh B. Com (Honours), M. Com, M-Phil Dhaka A thesis submitted in fulfillment of the requiremen ts for the degree of Doctor of Philosophy School of Advertising, Marketing and Public Relatio ns Faculty of Business QUEENSLAND UNIVERSITY OF TECHNOLOGY Brisbane, Queensland 4000, Australia 2006 ii Title: Antecedents of Commitment to an Import Supplier Saleh @ 2006 Key Words: 1. Antecedents of commitment 2. Importer\u2019s commitment 3. Importer supplier relationship 4. Mediating role of trust 5. Cultural similarity 6. Communication 7. Knowledge and experience 8. Supplier\u2019s opportunism 9. Environmental volatility 10. Transaction-specific investment 11. Supplier\u2019s competencies iii Abstract The concept of commitment has emerged recently in i nternational business literature especially in explaining importer behaviour as a co unterpart of the process of internationalisation. Importer commitment often pla ys a dominant role as one of the major factors influencing relationships",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_1",
+    "document": "Commitment & Other Inter-Relationships \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026. 138 6.1 Significant Paths in the Proposed Model\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026 \u2026\u2026... 160 6.2 Significant Additional Paths in the Modified Mo del\u2026\u2026\u2026\u2026\u2026... 161 6.3 Final Tested Model with Standardised \u03b2\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026... 162 7.1 A Conceptual Framework for Trust and Commitment Building Process \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026 \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.. 163 7.2 Cultural Similarity \u2013 Communication Matrix \u2026\u2026\u2026\u2026 \u2026\u2026\u2026\u2026... 173 7.3 Cultural Similarity \u2013 Learning, Knowledge and E xperience Matrix 178 7.4 Cultural Similarity \u2013 Trust Matrix \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026 \u2026 182 7.5 Communication - Learning, Knowledge and Experie nce Matrix \u2026. 186 7.6 Communication \u2013 Trust Matrix \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026 188 7.7 Communication \u2013 Commitment Matrix \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026 189 7.8 Learning, Knowledge and Experience \u2013 Trust Matr ix \u2026\u2026\u2026\u2026\u2026. 192 7.9 Learning, Knowledge and Experience \u2013 Commitment Matrix \u2026\u2026. 194 7.10 Trust - Commitment Matrix \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026.. 197 7.11 Derived Qualitative Model Based on In-depth Da ta: Trust and Commitment Building Process \u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026\u2026. 205 xi List of Appendices Appendix Page",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_2",
+    "document": "international channels (Richey and Myers, 2001). It is also connoted that exporter commitment involves the export management\u2019s willing ness to devote adequate tangible and intangible resources to export related activiti es (Katsikeas et al. , 1996). More specifically, Beamish et al. (1993) perceived commitment to exporting as \u201cthe a mount of the firm\u2019s personnel and top management resources d evoted to exporting activities\u201d (p. 128). The marketing discipline has emphasised the role of relationship commitment in relational exchange. Commitment is conceptualised a s an ongoing process with the partner, characterised by maximising efforts for lo ng-term continuance of the relationship. In this context, Morgan and Hunt (199 4) have defined commitment as \u201can exchange partner believing that an ongoing relation ship with another is so important as to warrant maximum efforts at maintaining it\u201d (p. 23). Some marketing scholars have 3 identified distributor commitment as an important r elational exchange",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_3",
+    "document": "process theory and transaction cost theory have provided the basis as well as soli d foundations toward extending their tenets in regard to a different perspective s uch as importer commitment. \u2022 The inferences from the above theories and literatu re have indicated that factors such as cultural similarity, knowledge and experien ce, supplier\u2019s competencies, trust, communication, environmental volatility, sup plier\u2019s opportunism, and transaction-specific investment are potential antec edents of importer commitment. \u2022 While the term commitment has received great attent ion not only in organisational science but also in other fields of investigation, this study is focused only on importer commitment to an import su pplier. However, this study has reviewed studies on buyer-seller relationships, distributor-supplier relationships, importer-exporter relationships, and manufacturer-supplier relationships for developing the proposed framework . \u2022 The study additionally consolidates and focuses on the other pertinent studies where most of the identified variables have been ex",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_4",
+    "document": "response rate, unit of analysis, selection of key informants, measurement of constructs, research instrument, survey data, analy tical tools of quantitative data, qualitative data collection, protocol and analytica l approach of qualitative data. Chapter 5 comprises three major sections which are sample profile, measurement model development and testing the proposed structur al models. The sample profile details the sample demographics, responses, data cl eaning and descriptive statistics. Secondly, in the process of measurement validation, all construct measures have been assessed individually in CFA models and sequentiall y in an overall measurement model to verify the unidimensionality of the measures. Fi nally, proposed and competing models have been tested in SEM and compared with the overa ll measurement model to verify the overall fit to the data and the theory. Construct v alidity and reliability have also been reported in this chapter of the study. Chapter 6 discusses the findings of",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_5",
+    "document": "transactions can be seen as one of the specialised forms of interpersonal behaviour (Hosmer, 1995). Williamson (1975) uses the terms \u2018principal\u2019 and \u2018agent\u2019 to explain this inter-organ isational or firm-to-firm relationship behaviour. From the principal versus agent point of view, Butler (1991) conceptualised that the literature on trust has con verged on the beliefs of contracting parties and the impact on commitment. One of the ce ntral assumptions of the transaction cost theory is the trust between partne rs because a situation of distrust is 22 viewed as misleading, distorting, disguising and co nfusing as well as risking opportunism (Hill, 1990). Conversely, a trusting s ituation is viewed as one which reduces transaction costs (Kwon and Suh, 2004) and demonstrates strong commitment between partners (Coote et al., 2003). In respect of asset specificity, the value of an as set in terms of commitment and cost may be attached to a",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_6",
+    "document": "Review of the Pertinent Directions The major focus of this section is to consolidate t he empirical findings and conceptual foci that have assessed the importer-supplier relat ionship. Prior research has identified a number of antecedents of commitment in different contexts. In particular, the export performance literature (Julian, 2003; Ka tsikeas et al. , 1996; Richey and Myers, 2001), the export-import distinction literat ure (Katsikeas, 1998; Liang and Parkhe, 1997), the export-import behavior literatur e (Chetty and Eriksson, 2002) and distributor-supplier relationship literature (Coote et al. , 2003; Goodman and Dion, 2001; Kim, 2001; Kim and Oh, 2002; Ruyter et al. , 2001; Skarmeas et al. , 2002) provide the context and background for the present topic. A systematic search for export literature reports c ommitment as a significant predictor of export performance. Nine recent studie s (Beamish et al. , 1993; Cicic et al. , 2002; Dominguez and Zinn,",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_7",
+    "document": "1998) have been used as predictors of distributor commitment in two studies each and mixed relationships have been repo rted. As can be seen in Appendix 2, the reviewed studies have also investigated 34 other interrelated DVs and 76 IVs that explained some of the explanatory variables of commitment. This indicates that some of those varia bles have an indirect relationship with distributor commitment. This brief review also shows that while commitment has been regarded widely in different relationship contexts, to date there has been no clear attempt to examine this with regards to impor ter commitment. The review of the theoretical bases and main stream commitment studie s also clearly suggest that eight driving factors of commitment could be included in an extensive model. The next section incorporates all the above directions toget her with other different supportive streams. 33 2.2 Literature Related to the Antecedents of Commit ment",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_8",
+    "document": "far has been made to investigate the impact of supplier\u2019s compet encies on importer commitment to an import supplier. Among the reviewed studies, thr ee empirical and three conceptual studies show coherency and explore the impact of su pplier\u2019s competencies on the business/commitment relationship. Lau (2002) examin ed the relative importance of nine resource-based capabilities and their correlat ions with performance measures in the global market, and found some support where buy ers are considering relative economic competency. The result suggests that there is a need to explore firms\u2019 emerging resources to achieve sustainable competiti ve advantage in the international market. This suggests that importers are more likel y to seek superior capabilities from the supply market and consequently a rent-seeking i mporter may build a long-term commitment to the supplier who provides better rela tive advantage than other suppliers. In addition, two conceptual papers have addressed t he impact",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_9",
+    "document": "trust (Morgan and Hunt, 1994; Zineldin and Jonsson, 2000). All studies expressed a negative relationship with the dependent variables indicating that a less committed party enjoys an advantage over a more committed par tner in both the long and short terms (Gundlach et al. , 1995) and a partner\u2019s opportunistic behaviour red uces trust in their relationship (Morgan and Hunt, 1994). The exc eption being the study by Zineldin and Jonsson (2000) which found a contrasti ng positive relationship between opportunism and distributor trust. From the different perspectives, three studies eluc idate links to examine supplier opportunism in the present context. In terms of dep endence and opportunism, the researcher perceived a negative relationship betwee n these two and pointed out that in the absence of a symmetric dependence, an individua l party can behave opportunistically (Heide, 1994). This may indicate that the buyer\u2019s dependence on the supplier is likely",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_10",
+    "document": "Oh, 2002; Skarmeas et al. , 2002) have found an unanimous positive significant relationshi p between transaction-specific investment and distributor commitment (including im porter commitment). Consequently, distributors\u2019 or importers\u2019 transacti on-specific investments tie them to a relational path and they are compelled to commit for long-term success. Since all these studies were conducted in developed country c ontexts, this could be tested in a 50 developing country context for further validation a nd facilitate generalisability of the findings. Other eight studies are found to be relevant to the present study. Buvik and Andersen (2002) found that under conditions of substantial a sset specificity, vertical coordination is more effective to reduce ex post transactions cost significantly in international buyer-seller relationships. This supp orts the finding of Klein et al. (1990) that transaction-specific investment has a p ositive relationship with channel integration in a foreign market. In addition, Heide and John (1988)",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_11",
+    "document": "some interrela tionships among variables with their hypothesised paths (Section 3. 1). \u2022 Propose a qualitative framework toward gaining more in-depth insight of the development process of trust and commitment in the importer supplier relationship (Section 3.2, Figure 3.2). \u2022 Validate the qualitative model, a competing model a long with a hypothesised relationship encapsulates the qualitative path dire ctions including mediating role of trust for empirical testing (Section 3.3, F igure 3.3) 56 3.1 Proposed Model and Hypothesised Relationships The conceptual framework for the present study is p resented in Figure 3.1. The relevant independent variables in the framework are the cultural similarity of the importer and the supplier, overseas supplier opport unism, communication, trust, environmental volatility, supplier\u2019s competencies, importer\u2019s transaction-specific investment, and importer knowledge and experience. The dependent variable is commitment to an import supplier. As the conceptual framework specifies, some of these variables have interrelations as well as",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_12",
+    "document": "(Heide and John, 1988). Heide and John (1990) erected strong support for specific investment and joint action and expectatio n of continuity in both the buyer and supplier context. Furthermore, Erramilli and Ra o (1993) revealed support for the lower levels of asset specificity and the buyer\u2019s s hared control in their international entry mode choice. In another direction, bilateral TSIs enhance commitment in the buyer-supplier relationship in the declining phase of their relationship life cycle (Jap and Ganesan, 2000). However, such investments const itute the impetus for creating 62 importer commitment to their overseas supplier rela tionships (Kim and Frazier, 1997). In a number of ways, the six commitment stud ies (as summarised in Appendix 2 and discussed in section 2.2.) have provided exte nsive and significant support for a positive relationship between buyer/importer TSI an d commitment to their supplier. These findings need to be validated in a",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_13",
+    "document": "This additionally enhances learn ing about each other, gaining knowledge and experience and building trust. Moreov er, it is claimed that frequency 68 of communication is the most significant indicator of the amount of communication rather than the duration of contact (Mohr and Nevin , 1990). Accordingly, frequency of communication helps firms to solve complex issue s in repetitive interactions directly. However, direct communication modes help build understanding and trust over the modes. Similarly, Morgan and Hunt (1994) a rgue that frequent and high quality relevant, timely and reliable communication generates trust which has a strong significant relationship with commitment. This appr oach clearly indicates that the effectiveness of different communication mechanisms facilitates the knowledge sharing process toward building trust and commitmen t. Knowledge and Experience The transaction cost view of bounded rationality (W illiamson, 1985) signifies the limited judgment of individuals as well as their li mited cognitive power",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_14",
+    "document": "has been conceptualised that knowledge gained through learning by interaction, t raining and development of professional ethos (Boyce, 2001) facilitates trust. However, tacit knowledge is experiential which is created by learning-by-doing and face-to-face communication (Spender, 1992) as the impetus of generating trust. So, it is hypothesised that: Hypothesis 4: The greater the importer\u2019s knowledge and experience in the relationship, the stronger will be the trust. The above four hypotheses signify the explicit medi ating role of knowledge- experience and trust in the model toward enhancing importer commitment to the import supplier. These hypotheses can also be prese nted alternatively in a summarised form: Hypothesis A: The effect of cultural similarity on commitment is mediated by communication, knowledge and experience, and trust. Hypothesis B: The effect of cultural similarity on commitment is mediated by knowledge and experience, and trust. The proposed conceptual framework and proposed comp eting model are tested in",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_15",
+    "document": "of the Chief Controller of Import and Export of Bangladesh where 7,590 commercial and 569 industrial importers were regist ered up to December, 2003 (Import Control Bureau, 2003). This is an entrusted authority where registration is compulsory for any kinds of import. However, verifi cation of this database was necessary before using it as a sampling frame becau se it was seldom updated to remove inactive importers. To this end, leading com mercial banks were contacted to crosscheck the list of operative industrial and com mercial importers from their register of importer clients and current contact ad dress of the importers. Earlier an endeavour was made to verify the above list using C entral Bank and Customs databases, but it was understood that they are invo lved with maintaining the total value of transactions and not maintaining a registe r for importers. As a result, a validated list through the",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_16",
+    "document": "specifically, this construct measures the extent to which an importer communicates business changes to the suppliers, information that may benefit one another, information about events and changes in the market, frequency of contact, an d information about new possibilities and problems if they arise. As the d omain specification of this measurement, three items (business changes to the s uppliers, information that may benefit one another, information about events and c hanges in the market) were drawn from Coote et al.\u2019s (2003) study where the alpha reliability score was reported as .85. Two additional items (frequency of contact, and inf ormation about new possibilities and problems if they arise) were extracted from Zi neldin and Jonsson\u2019s (2000) study to cover the additional facets in the measurement d omain. Most of the items were used in other studies (Mohr et al. , 1996; Mohr and Sohi, 1995; Selnes, 1998). All questionnaire",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_17",
+    "document": "and consistency, as the conceptual and operational definitions connote. Accordingly, along with the extant established meas ures, in some instances it was intended to combine extant measure s in new ways and add new items toward developing new measures for a new empirical context. This certainly has increased the risk of reliability and validity of s ome of these operational measures which required extensive pre-testing. All the quest ionnaire items are shown in Appendix - 4. In terms of the use of scales, variants of scales w ere common from five to nine and most of the commitment studies used 7-point scales to operationalise the variables (see Appendix 1). This scale integrates ideal preci sion of seven categories of absolute judgement (Miller, 1956). This scale is universally adaptable, relatively insensitive and statistically sophisticated (Malhotra, 2002). As such, this 7-point subjective rating scale along with semantic differential scale was used in",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_18",
+    "document": "statistics , treatment of missing data and identifying outlier cases are discussed in this sec tion. 5.1.1 Respondent and Firm Profile In terms of sample demographics, firm and responden t characteristics are varied widely (Morgan and Hunt, 1994), and are reported in this section. Respondents\u2019 gender, educational qualifications, age, experience , and their job position in the organisation are relevant personal data. In additio n, in the importer category, duration of the firm\u2019s involvement in importing, the number of importing items/products, number of employees, firms\u2019 exporting status, and t he duration of exports are relevant to the firm characteristics. While demographic information has no impact on the level of analysis of this study, this reporting may provide a generalised view in te rms of male and female participation in international business in develope d and developing countries. Table 5.1 shows that the sample was made up mostly of mal e",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_19",
+    "document": "A few missing responses in different scales were f ound randomly in another eight surveys and a maximum likelihood function was used to replace those missing values (Downey and King, 1998 ; Enders and Bandalos, 2001). Therefore, upon deletion of 21 cases, 241 usable sa mples were retained in the database (response rate of 40.17%) for further exam ination of normality and outliers. Before moving towards assessing normality and ident ifying outlier cases, it should be noted that a lot of information was missing in the ad hoc measurement section of commitment in the questionnaire. This might be due to a lack of understanding and reluctant attitude of the respondents because there were some questions relating to prospects, growth, and profitability which might be considered sensitive by the informants. As this was a supplementary attempt to measure commitment differently, non-response was not considered a problem and it wa s excluded",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_20",
+    "document": "However, \u03c72 is very sensitive in relation to the sample size an d complexity of the model: the more complex the model the bigger the \u03c72 that is more likely to reject the specified model (Kenny and McCoach, 2003). Gulliksen and Tuke y (1958, p.96) note that \u201cif the sample size is large, the \u03c72 test will show that the data are significantly diff erent from those expected on a given theory even though t he difference may be so very slight as to be negligible or unimportant on other criteria\u201d. Taking these complexities into account, some researchers have referred to and preferred the use of \u201cnormed\u201d \u03c72 where \u03c72 is divided by the degrees of freedom to provide an \u03c72 measure per degree of freedom with an index of model parsimony (Holmes-Sm ith et al. , 2004). The equation for normed \u03c72 is: Normed \u03c72 = \u03c72/df. Accordingly, a",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_21",
+    "document": "validity of this construct. The composite reliabili ty score for this measure is .69 which signified that these items are considered reliable for this measure. 5.2.2.3 Cultural Similarity: Initial Findings Cultural similarity between the importer and suppli er was measured by a five item scale. All of these items were subjected to a CFA, the initial results are reported in Table 5.8. The results of the CFA of the five items indicated that the model was a poor fit to the data with a high \u03c72 value of 35.735 (df= 5, p = .000), unacceptable CMIN/DF and RMSEA scores despite reasonable IFI, TL I, and CFI scores above .90. Investigation of the covariance structure in the MI s section of this construct measure specifically suggested that at least one modificati on was necessary due to associated misspecification. The expected change statistics of error covariances revealed that three of the four",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_22",
+    "document": "overall fit to the data al though \u2018item 2\u2019 evidenced a high loading score of .93. In the context of TSI, \u2018item 5\u2019, (\u2018if we decided to stop working with our major supplier, we would be wasting a lot of knowledge regarding their method of operation\u2019) regarding the risk of losing knowledge of method of operation 118 is slightly different from other directly related i ncorporated investment aspects in the questionnaire. 6 This item may share the sense of wording with \u2018ite m 4\u2019 as well. However, before making the final decision of deleti on of these items, an ad hoc attempt was made to test the model by excluding onl y \u2018item 5\u2019. This evinced a relatively improved result but did not seem to be a n adequate level of fit to the data where \u03c72 value was 25.655 (df =5. P=.000), CMIN/DF was 5.13 1 and RMSEA was",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_23",
+    "document": ".70 .68 11.51 Commit3 We --------- to increase our purchase from our major supplier in the future whatever product he/she can supply (Do not expect/Expect) .91 .92 17.94 Commit4 We -------- to maintain/continue working with our major supplier for a long time (Do not expect/Expect) .92 .92 18.18 Commit5 We -------- intentions to develop and strengthen this relationship over time (Do not have/Have) .85 .85 15.94 Commit7 We -------- very satisfied with the level of cooperation we get from our major supplier (Do not feel/Feel) .73 .73 12.64 Commit1 We -------- more time to our major supplier when it needs help (Do not devote/Devote) .55 Commit6 This relationship ----------- maximum effort and involvement (Do not requires/Requires) Achieved Fit Indice s CMIN/DF (\u03c72/df) RMSEA IFI TLI CFI Initial 5.729 (51.563/9) .143 .955 .925 .955 Final 1.686 (8.43/5) .054 .996 .992 .996 Composite Construct Reliability .91 The respecification from the initial six",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_24",
+    "document": "\u2018trust\u2019 items, three \u2018supplier\u2019s competencies\u2019 items, one \u2018communi cation\u2019 item, one \u2018cultural similarity\u2019 item, two \u2018transaction-specific investm ent\u2019 items and one \u2018knowledge and experience\u2019 item were not included in the measures. As a result, in total eleven items were excluded during the process of measurement ref inement. Finally, all measurement models in CFA with fit statistics exhib ited an adequate level of fit indicators that are shown in Table 5.17. 129 Table 5.17 Summary of the Measurement Models Fit Statistics Overall Model Fit Model Fit Model Comparison Fit Measures Measurement Models CMIN/DF RMSEA IFI TLI CFI Composite Reliability Trust 3.135 .096 .993 .978 .993 .91 Communication 1.795 .059 .994 .981 .994 .69 Cultural Similarity .971 .000 1.00 1.00 1.00 .79 Supplier\u2019s Competencies .158 .000 1.00 1.00 1.00 .72 Transaction- Specific Investment 1.645 .053 .997 .991 .997 .71 Opportunism 1.461 .045 .997 .994 .997 .78 Environmental Volatility 1.723 .056 .992 .984",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_25",
+    "document": "1995; Wathne and Heide, 2000). This in turn asserts that more freque nt communication is likely to be a stimulus to reduce the opportunistic tendency in th e importer-supplier relationship. In the context of cultural similarity and suppliers \u2019 opportunism, O'Grady (1996) contends that entering a culturally close market re duces the level of ambiguity in the new market as well as in the relationship. This sug gests that cultural similarity between importer and supplier is a stimulus to disc ourage opportunism in the importer-supplier relationship. Under the similar c ultural import-supply situation, both parties are familiar with their business and e thical practices which discourages opportunistic inclination in the relationship. This clearly indicates that the higher degree of cultural similarity between importer and supplier is instrumental in decreasing the supplier\u2019s opportunistic attitude in the importer-supplier relationship. Further, competencies are bundles of resources and capabilities which enable a firm to",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_26",
+    "document": "to an import supplier. Howe ver, the bivariate correlation in Table 5.16 shows that cultural similarity is signif icantly correlated with commitment (coefficient .38, significant at p \u2264 .001), and it is one of the highly correlated IVs in the model. However, the non-significant result in the SEM may suggest that some of the covariances of cultural similarity and commitme nt may have been explained by other variable(s) in the complex model leaving an i nsignificant amount of unique covariances for this path. To examine this contenti on, a hierarchical regression (in SPSS) was conducted where cultural similarity, oppo rtunism, trust, communication, environmental volatility and supplier\u2019s competencie s were ordered as priority of entry in the model to explain importer commitment. The an alysis (shown in Appendix-9A) clearly indicates that while cultural similarity is highly significant in the initial model (with significant \u03b2 value at p <.001), it becomes gradually",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_27",
+    "document": "study specifically postulates that increasing volatility surrounding the international exchange relationship decreases commitment to the s upplier. This also signifies that environmental change affects not only the demand an d supply conditions but also affects the prediction of future marketing action a nd results. Either way, the present study strived to generalise this finding from a dev eloping country perspective. 6.2.6 Supplier\u2019s Competencies and Importer Commitme nt: The coefficients for the direct path between supplier\u2019s competencies and importer commitment (estimated standardised \u03b2 value .28 and .29, t-value 4.39 and 4.35 with p \u2264 .001) in both models provide strong significant support for hypothesis 6 . This is an indication that the higher degree of relative competencies offered by t he supplier has a direct positive effect on the importer commitment. In other words, the higher the importers\u2019 perceived competencies of a specific supplier, the higher the commitment to the supplier.",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_28",
+    "document": "commitment studies and extend support to their findings (Ander son and Weitz, 1992; Goodman and Dion, 2001; Kim and Frazier, 1997; Saleh et al. , 2005; Zineldin and Jonsson, 2000). However, it refutes the finding of Moore (19 98) where no significant relationship was found between communication and th e buyer\u2019s relationship commitment. The result also supports the argument t hat collaborative communication is the root of success in the dealer-manufacturer r elationship to increase commitment, satisfaction, and coordination (Mohr and Nevin, 199 0; Mohr et al. , 1996). This means communication is one of the significant factors in the buyer-seller, dealer- manufacturer, and also importer-import supplier rel ationship. Therefore, the present finding in terms of positive effect of communicatio n on commitment increased generalisability from a different seldom context in the literature. From the rational choice paradigm focus in organisa tional behaviour (OB) literature, Liang and Parkhe (1997) explained",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_29",
+    "document": "links it is clear that supplier opportunism and importer trust on the supplier are two mediating variables in the mod el that mediate the effect of communication, cultural similarity and supplier\u2019s c ompetencies on commitment in the reported modified model. In terms of additional pat h links, the drivers of opportunism are cultural similarity, communication, and supplie r\u2019s competencies where trust is a mediating factor of supplier opportunism toward imp orter commitment. Accordingly, the final model for importer commitment to import s upplier is: Trust Communication Cultural Similarity Supplier\u2019s Competencies Opportunism Commitment -.50 -.31 -.42 .13 -.46 162 Figure 6.3 Final Tested Model with Standardised \u03b2 Index for Path Directions: \u2013\u2013 Significant original paths, ---- Significant add itional paths, \u2026. Non-significant original paths The significant findings of the model can be repres ented in the following three equations: (i) TRUST= *COM + *OPPONSM + e (ii) OPPONSM= *COM + *SC",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_30",
+    "document": "as C1 to C12. These two code numbers have been used to facilitate cross-case and cross-category analysis. The profile of the cases and their categories are discu ssed in the section to follow. 7.4 Qualitative Depth Interview Profile As emphasised in section 7.1, based on the criteria of selecting knowledgeable key informants for in-depth interview, rigorous attempt s were made to select respondents in each category. As a result, twelve importing fir ms (six from each city) were identified from industrial and commercial importing categories. More specifically, out of twelve respondents, at least two from each categ ory code were ensured. A key decision-maker in each firm was deemed eligible and agreed to participate in the in- depth interviews. Among those, eleven interviews we re recorded. One respondent was reluctant for the interview to be recorded and that preference was noted and written into the protocol sheet. Each of the",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_31",
+    "document": "3.2), cultural s imilarity between the importer and supplier reduces the level of uncertainty and makes it easier for firms to communicate freely and learn from each other quickly (Kogut and Singh, 1988). As presented in the 174 above matrix, the six cases in box-1 appear to vali date the theoretical expectation (Swift, 1999; Williamson, 1985). In particular, looking at the effect of cultural si milarity on communication in box-1 (Figure 7.2), it was revealed that a culturally sim ilar market enforces and facilitates the exchange of information. Information can be con veyed explicitly through close interpersonal communication methods such as either direct or indirect conversation through a personal visit or over the telephone. Foc using on these, C12, for example, highly stressed that: Doing business with a supplier from culturally simi lar market seems transaction within domestic market because there is no variation in exchanging views and communicating easily",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_32",
+    "document": "potential supplier because the market is culturally similar a nd we knew their cultural and business practices ------ that helped a lot to gather ideas and knowledge about product, quality judgment, manufact uring process, packaging, shipment procedure etc. He added: My supplier showed me and taught me everything in h is factory and since that time I am his buyer and exporting their goods all over the world just as finished/complete goods. This interview revealed that doing business with a culturally similar market assists in understanding the supplier\u2019s unexpressed expectatio ns and preferences like official decorum, courtesy, and greetings through regular vi sits. Common language-based communication also makes contact, discussion, expla nation and interpretation of all business issues easier. The above illustrations als o clearly hint that learning, knowledge and experience gathering is based on inte ntion and tacit knowledge is experiential which is generated through learning by doing, by",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_33",
+    "document": "delivering order, shipmen t schedules. But for immediate action we use SMS as 24 hours mobile offi ce \u2013 this is a significant tool in updating news around the busine ss world. Most importantly, it is also revealed and noted th at most of the key informants stressed timely shipment as part of their regular c ommunication content with their major supplier. Beyond this, the other relevant asp ects of communication may be specified by initial contact or by the banks as cor porate authority in this process. However, these may vary from product to product or from contract to contract. It is also revealed that most of the importing firms use the internet frequently; however, when resolving any urgent issue, they use the telep hone and fax, and SMS as a mobile office for immediate action. All interviewed firms use internet/e-mail frequent ly on a regular basis. Direct communication",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_34",
+    "document": "interpreted these terms as one integral concept. Therefore, these synonymous interlinked te rms are used in this thesis as a single converged factor towards simplifying the dis cussion and to delve into the unfolding knowledge development process and its imp acts as perceived by the key informants. Focusing on the learning and knowledge gathering pr ocess in the importer supplier relationship, C1 for example explained that: \u2026\u2026 I have learned the detailed product knowledge su ch as quality, capacity, and handling procedure, technical attribu tes of the products from my supplier through direct and indirect contac t and visiting his business place. Further C2 elaborated that: I got support from my supplier at the early stage o f my business initiative who helped me to gather the product knowledge. \u2026\u2026.. he gave me all relevant ideas and taught me technical things of th e products. He also came to see",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_35",
+    "document": "but gr adual efforts. This process further develops commitment and trust as relationship outpu t and ties up the importer and supplier in a strong successful enduring relationsh ip. For example, C1 stated that: Our present relationship is family relationship bec ause we\u2019re very occasionally attending the family programs e.g. ki ds birthday or any other family function and not only that we\u2019re very often to exchange the gifts and presents in our festivals. These ultimate ly tied us in a body which is more than commitment. 197 This hints that a long-term committed relationship may enhance their long-term business success. Turning to maintaining the relationship, it is cons idered that once a relationship is developed with the major supplier, a continuous eff ort is also needed to maintain it. For example, C7 commented that: Our relationship is tested because once we faced a severe problem due to misunderstanding from",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_36",
+    "document": "IS 1 Code IS 2 Code IS 3 Code IS 4 Code IS 5 Comments CULSIM \uf0df /barb2right COMUN C1 C5 C7 Not Expected CULSIM /barb2right COMUN C2 C4 C6 C8, C9 C12 Expected CULSIM /barb2right LEKNEX C1, C2 C4, C5 C6, C7 C9 C12 Expected CULSIM /barb2right TRUST C4 C6 Not Expected COMUN /barb2right LEKNEX C1, C2, C3 C4, C5 C6, C7 C8, C9 C10, C11, C12 Expected COMUN /barb2right TRUST C4 C6, C7 C9 Not Expected COMUN /barb2right COMMIT C5 C12 Not Expected LEKNEX /barb2right TRUST C1 C4 C6, C7 C11 Expected LEKNEX /barb2right COMMIT C2, C3 C5 C8, C9 C10, C12 Not Expected TRUST /barb2right COMMIT C1 C4 C6, C7 C11 Expected COMMIT /barb2right TRUST C2, C3 C5 C8, C9 C10, C12 Not Expected Legend: CULSIM = Cultural Similarity, COMMUN = Commu nication, LEKNEX = Learning and Knowledge and Exper ience, TRUST = Trust, and COMMIT =",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_37",
+    "document": "trust and commitment buildin g process in the importer-supplier relationship. Accordingly, a conceptual qualitative model was developed incorporating the five most relevant factors to val idate the model with richer in-depth interview data. As discussed in Chapter 3 (section 3.3), a quantitative competing model was also developed with the same antecedents to verify the contention of the mediating role of trust in the importer-supplier co mmitment relationship. The proposed competing model interconnected four additi onal paths to demonstrate the mediating role of trust on importer commitment. 209 To achieve the research objective, methodological a ppropriateness was an important consideration to test the proposed models. Therefor e, as an empirical setting, primary data were collected from a cross-section of importi ng firms in a developing country context. The two step mail-outs and follow-up phone calls yielded 232 usable responses (38.67% response rate) from two basic cat egories of importers (commercial and",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_38",
+    "document": "Further, the causal relationship between importer knowledge \u2013 experience and commitment indicates tha t knowledge \u2013 experience is a significant tool in the importer-exporter dyad. Thi s indicates that it is an integral part of the importers\u2019 capabilities; and that the import manager should gather more diversified technical and non-technical internation al business knowledge because it is the root of overall export success. It is important to note that managers involved in i mporting should recognise that the behavioural and perceptual antecedents of commitmen t are crucial in the process of developing sustainable high levels of commitment (G oodman and Dion, 2001) to an import supplier. More indicatively, results suggest that the import managers should 214 consider that as a central premise of the internati onal business relationship, trust plays a significant role, where opportunistic inclination affects trust in the relationship (Morgan and Hunt, 1994). This implies that opportun istic",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_39",
+    "document": "Qualitat ive Relationships between Comments Communication and Learning, Knowledge and Experienc e; Cultural Similarity and Communication; Cultural Similarity a nd Learning, Knowledge and Experience; Learning, Knowledge and E xperience and Trust So far, these are the fresh contributions from the qualitative findings validated by the result of modified competing model which has not been discussed in this thesis (Appendix 9). However , significant (+) impact of communication on knowledge and experience revealed unanimous support from all cases. 220 D. Methodological Contributions Construct Measure Comments Cultural Similarity, Supplier\u2019s Competencies, and K nowledge and Experience New construct measures were developed for these var iables and validates in CFA which are reliable as well as conv erged into the respective construct. Commitment, Trust, Communication, Opportunism, Envi ronmental Volatility, and Transaction-Specific Investment This validates these constructs through operational ising in a new context and achieved their generalisability. E. The Additional Paths Directions: Quantitative Communication",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_40",
+    "document": "theory) which framed the original foundation of this study three and hal f years ago. This constitutes an impressive recognition of the contribution in an in teresting research setting that this study makes towards the IP approach. It is in this context that the contribution of this study can be examined and analysed. 226 References: Aaker, D.A., Kumar, V., and Day, G.S. (2001) Marketing Research . John Wiley & Sons, Inc: New York. Abdul-Muhmin, A.G. (2002) 'Effects of Suppliers' Ma rketing Program Variables on Industrial Buyers' Relationship Satisfaction and Co mmitment', The Journal of Business & Industrial Marketing 17 (7): 637-651. Achrol, R.S. (1991) 'Evolution of the Marketing Org anization: New Forms for Turbulent Environments', Journal of Marketing 55 (4): 77-93. Achrol, R.S. and Stern, L.W. (1988) 'Environmental Determinants of Decision- Making Uncertainty in Marketing Channels', Journal of Marketing Research 25 (1): 36-50. Ali, M. Y. (1995) Performance of International",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_41",
+    "document": "Relationships', Journal of Marketing 51 (2): 11-27. Dyer, J.H. and Chu, W. (2000) 'The Determinants of Trust in Supplier-Automaker Relationships in the U.S., Japan, and Korea', Journal of International Business Studies 31 (2): 259-285. Edwards, R.W. and Buckley, P.J. (1998) 'Choice of L ocation and Mode: The Case of Australian Investors in the UK', International Business Review 7: 503-520. Eisenhardt, K.M. (1989) 'Building Theories from Cas e Study Research', Academy of Management. The Academy of Management Review 14 (4): 532-550. 231 Elizur, D. and Koslowsky, M. (2001) 'Values and Org anizational Commitment', International Journal of Manpower 22 (7): 593-599. Enders, C.K. and Bandalos, D.L. (2001) 'The Relativ e Performance of Full Information Maximum Likelihood Estimation for Missi ng Data in Structural Equation Models', Structural Equation Modeling 8(3): 430-457. Eriksson, K., Johanson, J., Majkgard, A., and Sharm a, D.D. (1997) 'Experiential Knowledge and Cost in the Internationalization Proc ess', Journal of",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_42",
+    "document": "R. G. , and Alchian, A.A. (197 8) 'Vertical Integration, Appropriable Rents, and the Competitive Contracting Process', Journal of Law and Economics 21 : 297-326. Klein, S., Frazier, G.L., and Roth, V.J. (1990) 'A Transaction Cost Analysis Model of Channel Integration in International Markets', Journal of Marketing Research 27 (2): 196-208. Kline, R.B. (2005) Principles and Practice of Structural Equation Mode ling . The Guilford Press: New York. Knight, G.A. and Cavusgil, S.T. (2004) 'Innovation, Organizational Capabilities, and the Born-Global Firm', Journal of International Business Studies 35 (2): 124-141. Kogut, B. and Singh, H. (1988) 'The Effect of Natio nal Culture on the Choice of Entry Mode', Journal of International Business Studies 19 (3): 411-432. Kogut, B. and Zander, U. (1993) 'Knowledge of the F irm and the Evolutionary Theory of the Multinational Corporation', Journal of International Business Studies 24 (4): 625. Kotabe, M. and Murray, J. Y. (2004) 'Global",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_43",
+    "document": "Study on 5 (Five) Selected Items. Unpublis hed M-Phil Dissertation, University of Dhaka, Dhaka, Bangladesh. 241 Saleh, M.A., Ali, M. Y., and Wickramasekera, R. (20 05) An Empirical Examination of the Antecedents of Importer Commitment to Import Supplier. Paper presented at Australia New Zealand International Business Academ y (ANZIBA), Melbourne. Saleh, M.A. and Ali, M.Y. (2005) Conceptualization of the Antecedents of Importer Commitment: A Framework of Future Research. Paper p resented at Academy for Global Business Advancement, New Delhi. Samuelson, P.A. (1948) 'International Trade and the Equalization of Factor Prices', Economic Journal 58 : 163-184. Schumacker, R.E. and Lomax, R.G. (1996) A Beginner\u2019s Guide to Structural Equation Modeling . Lawrence Erlbaum Associates: Mahwah, N.J. Seale, C. (1999) The Quality of Qualitative Research . Sage Publications: London. Sekaran, U. (2000) Research Methods for Business . Lehigh Press: New York. Selnes, F. (1998) 'Antecedents and Consequences of Trust and Satisfaction in Buyer-",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_44",
+    "document": "DV-Buyer\u2019s trust IV-Communication IV-Conflict IV-Similarity + + \u2013 No sig. rel. 5 items on a 5-point scale 5 items on a 5-point scale 5 items on a 5-point scale 4 items on a 5-point scale 4 items on a 5-point scale 4 items on a 5-point scale China Mail survey 152 RR 15% (app.) Industrial buyer-seller relationship 247 Author (s) DV=Dependent Variable IV=Independent Variable Relationship with DV Measurement Coun try Method Number of Respondent & Response Rate Unit of Analysis Geyskens, Steenkamp, Scheer and Kumar (1996) DV-Dealer\u2019s commitment (affective and calculative) IV-Interdependence IV-Trust (for affective positive, and for calculati ve negative) IV-Interdependence asymmetry + Mixed Mixed 6 items on a 7-point scale 6 items on a 7-point scale 5 items on a 7-point scale Calculated as the absolute value of the difference between supplier and dealer dependence USA and Nethe rlands Mail survey US 453 Dutch 289 RR 28% &",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_45",
+    "document": "commitment relationship to the financial service supplier firm Skarmeas et al. (2002) DV-Importer\u2019s (distributor\u2019s) commitment IV-Transaction specific investment IV-Opportunism IV-Environmental volatility IV-Exporter\u2019s cultural sensitivity DV-Exporter\u2019s opportunism IV-Cultural sensitivity IV-Environmental volatility + \u2013 No sig. rel. + \u2013 + 12 items on a 7-point scale 4 items on a 7-point scale 5 item on a 7-point scale 4 item on a 7-point scale 4 item on a 7-point scale 4 item on a 7-point scale 5 item on a 7-point scale USA Mail survey 216 RR 22% Importing distributor\u2019s commitment relationship with exporting manufacturer 253 Author (s) DV=Dependent Variable IV=Independent Variable Relationship with DV Measurement Coun try Method, Respondent & Response Rate Unit of analysis Siguaw et al. (1998) DV-Distributor\u2019s commitment to the relationship IV-Distributor\u2019s trust IV-Distributor\u2019s perception of cooperative norms IV-Supplier\u2019s market orientation IV-Distributor\u2019s market orientation DV-Distributor\u2019s market orientation IV-Supplier\u2019s market orientation DV-Distributor\u2019s trust IV-Supplier\u2019s market orientation IV-Distributor\u2019s market orientation",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_46",
+    "document": "tributor IV-Use of social enforcement mechanism IV-Use of contractual enforcement mechanism IV-Manufacturer\u2019s relative dependence IV-Manufacturer\u2019s pledge of exclusivity to distribu tor IV-Manufacturer\u2019s pledge of investments to distribu tor + No sig. rel. + + \u2013 + + + + 4 items on a 5-point scale 4 items on a 5-point scale 3 item on a 5-point scale 3 items on a 5-point scale 4 items on a 7-point scale 3 items on a 7-point scale 4 items on a 7-point scale 5 3 items on a 7-point scale 6 items on a 7-point scale 1 items on a 7-point scale 5 3 items on a 7-point scale USA Mail survey 314 RR 12.57% Industrial distributor and manufacturer (supplier) relationship NB: Data collection method followed in 32 commitment studies and its percentage Mail survey \u2013 24 studies which is 75 % of total stud ies Personal interview \u2013 6 studies which",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_47",
+    "document": "& Hunt (1994) 1 IV-Relationship understanding Holm et al. (1996) 1 IV-Trust under conditions of buyer dependence on a supplier Andaleeb (1996) 1 IV-Perceived territorial exclusivity Anderson & Weitz (1992) 1 IV-Distributor\u2019s perception of the level of conflic t Anderson & Weitz (1992) 1 IV-Manufacturer engages in direct selling Anderson & Weitz (1992) 1 IV- Manufacturer\u2019s perception of the level of confl ict Anderson & Weitz (1992) 1 IV-Manufacturer\u2019s perception of the distributor\u2019s c ommitment Anderson & Weitz (1992) 1 IV-Manufacturer\u2019s perception of the level of commun ication Anderson & Weitz (1992) 1 265 Variable Studies Frequency IV-Manufacturer\u2019s perception of the distributor\u2019s r eputation Anderson & Weitz (1992) 1 IV-Manufacturer grants territorial exclusivity to d istributor Anderson & Weitz (1992) 1 IV-Similarity (ethical and cultural) Coote et al. (2003) 1 IV-Structural bonds Rodr\u00edguez and Wilson (2002) 1 IV-Social bonds Rodr\u00edguez and Wilson (2002) 1 IV-Adaptation Zineldin & Jonsson (2000) 1",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_48",
+    "document": "7 d. Our major supplier is open in dealing business with us 1 2 3 4 5 6 7 e. Our major supplier has a high degree of integrity 1 2 3 4 5 6 7 f. Transactions with our major supplier do not need close supervision 1 2 3 4 5 6 7 272 Q 8. To what extent do you agree/disagree with the following statements? \u201c Please keep your major supplier of a major product in your mind while you fill up this questionnaire\u201d and circle the most appropriate number. Each scale item indicates: 1.Strongly disagree 2. Disagree 3. Slightly disagree 4. Neither agree Nor disagree 5. Slightly agree 6. Agree 7. Strongly agree I believe that ------------- Strongly disagree \uf0df --- /barb2right Strongly agree a. We keep our supplier informed about changes in our business 1 2 3 4 5 6 7 b. Our major supplier and",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  },
+  {
+    "id": "sub_4_chunk_49",
+    "document": "concerns about the ethical conduct of this proj ect, please contact the Research Ethics Officer on (07) 3864 2340 or on email ethics contact@qut.edu.au . Your cooperation in this research project will be g reatly appreciated. Yours sincerely, Md. Abu Saleh PhD Candidate School of International Business QUT, Brisbane, QLD 4001 287 Working guide/manual of qualitative information Q1: How many suppliers do you have currently? Q2: How long have you been involve with your major supplier? Q3: Can you please describe your relationship with your most important major supplier i.e. specific supplier? Q4: How did the relationship develop or is developi ng over the time? (More directions may be required) OR How has the relationship developed over time? Q5: How committed are you to the import supplier re lationship? (That is, how likely are you to continue importing from this supplier, i .e. your major supplier?) Why? (If the answer",
+    "metadata": {
+      "doc_id": "sub_4"
+    }
+  }
+]

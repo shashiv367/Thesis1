@@ -48,10 +48,12 @@ export default function GuideSubmissions() {
       const res = await axios.patch(`${API_BASE_URL}/api/task-submissions/${id}/`,
         { action: 'plagiarism' }, getHeaders());
       setMsg({ type: "success", text: `Analysis complete. Similarity: ${res.data.plagiarism_score?.toFixed(1)}%` });
-      fetchData();
     } catch (err: any) {
       setMsg({ type: "error", text: err.response?.data?.error || "Plagiarism analysis failed. Ensure PyPDF2/python-docx are installed." });
-    } finally { setRunningPlagiarism(null); }
+    } finally {
+      setRunningPlagiarism(null);
+      fetchData();
+    }
   };
 
   const getPlagiarismBadge = (sub: TaskSubmission) => {
@@ -132,7 +134,7 @@ export default function GuideSubmissions() {
                         </a>
                         <button
                           onClick={() => runPlagiarism(s.id)}
-                          disabled={runningPlagiarism === s.id || s.plagiarism_status === 'processing'}
+                          disabled={runningPlagiarism === s.id}
                           className="inline-flex items-center text-purple-600 hover:bg-purple-50 p-2 rounded-lg disabled:opacity-40" title="Run Plagiarism Check">
                           {runningPlagiarism === s.id ? <Loader className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
                         </button>

@@ -2,6 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
+    ArxivCorpusBuildView,
     GuideOverviewView,
     GuideTaskDetailView,
     GuideTaskListView,
@@ -25,6 +26,7 @@ urlpatterns = [
     path("", include(router.urls)),
     # Guide APIs
     path("guide/overview/", GuideOverviewView.as_view(), name="guide-overview"),
+    path("guide/corpus/build/", ArxivCorpusBuildView.as_view(), name="guide-corpus-build"),
     path("guide/teams/", GuideTeamsView.as_view(), name="guide-teams"),
     path(
         "guide/teams/<int:team_id>/analysis/",
