@@ -160,10 +160,12 @@ export default function GuideEvaluation() {
                       <p className="text-sm text-gray-500">{s.task_title} · Submitted {new Date(s.submitted_at).toLocaleDateString()}</p>
                       {s.plagiarism_score !== null && (
                         <p 
-                          className="text-sm mt-1 font-semibold cursor-pointer text-red-600 hover:underline inline-block"
+                          className={`text-sm mt-1 font-semibold cursor-pointer hover:underline inline-block ${
+                            s.plagiarism_score > 25 ? "text-red-600" : "text-emerald-700"
+                          }`}
                           onClick={() => setSelectedMatches(s.plagiarism_matches || [])}
                         >
-                          Plagiarism: {s.plagiarism_score}%
+                          {s.plagiarism_score > 25 ? "⚠️ Plagiarized" : "🛡️ Non-Plagiarized"}: {s.plagiarism_score}%
                         </p>
                       )}
                     </div>
@@ -254,10 +256,14 @@ export default function GuideEvaluation() {
                     <td className="py-4 text-center">
                       {s.plagiarism_score !== null ? (
                         <span 
-                          className="cursor-pointer font-bold text-red-600 hover:underline" 
+                          className={`cursor-pointer font-bold hover:underline text-xs px-2 py-1 rounded-full ${
+                            s.plagiarism_score > 25
+                              ? "bg-red-100 text-red-700 border border-red-200"
+                              : "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                          }`} 
                           onClick={() => setSelectedMatches(s.plagiarism_matches || [])}
                         >
-                          {s.plagiarism_score}%
+                          {s.plagiarism_score > 25 ? "Plagiarized" : "Non-Plagiarized"} ({s.plagiarism_score}%)
                         </span>
                       ) : (
                         <span className="text-gray-400">—</span>

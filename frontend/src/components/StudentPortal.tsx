@@ -91,6 +91,23 @@ export default function StudentPortal({ initialTab = "overview" }: StudentPortal
     fetchData();
   }, []);
 
+  // Auto-poll silently if any submission is currently processing
+  useEffect(() => {
+    const hasProcessing = submissions.some(s => s.plagiarism_status === "processing");
+    if (!hasProcessing) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const subRes = await axios.get(`${API_BASE_URL}/api/task-submissions/`, getHeaders());
+        setSubmissions(subRes.data);
+      } catch {
+        // ignore background poll errors
+      }
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [submissions]);
+
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setPwdMsg({ type: "", text: "" });
